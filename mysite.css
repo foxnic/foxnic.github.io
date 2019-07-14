@@ -110,3 +110,17 @@ h3 {
   margin-right: 15px; /* Add some white space to the right */
   text-align: center;
 }
+
+/* Special style for the home page links at the top (twitter, github, linkedin) */
+.toplinks
+{
+  color: #e6551c;
+  font-family: 'Verdana', sans-serif;
+  font-size: 18px;
+  text-align: left;
+  line-height: 1.5em;
+  letter-spacing: 0.05em;
+  margin-left: 15px; /* Add some white space to the left */
+  margin-right: 15px; /* Add some white space to the right */
+  text-align: center;
+}
