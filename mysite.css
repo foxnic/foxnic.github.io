@@ -101,3 +101,12 @@ h3 {
   margin-left: 15px; /* Add some white space to the left */
   margin-right: 15px; /* Add some white space to the right */
 }
+
+/* Special style for the home page image at the top */
+.topimg{
+  margin-top: 5px; /* Add some white space above images */
+  margin-bottom: 5px; /* Add some white space below images */
+  margin-left: 15px; /* Add some white space to the left */
+  margin-right: 15px; /* Add some white space to the right */
+  text-align: center;
+}
