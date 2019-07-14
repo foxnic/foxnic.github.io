@@ -135,3 +135,7 @@ h3 {
   margin-right: 15px; /* Add some white space to the right */
 }
 
+.boxy img 
+{
+  width: 100%;
+}
