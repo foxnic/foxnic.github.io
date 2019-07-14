@@ -3,8 +3,8 @@ img
 {
   margin-top: 5px; /* Add some white space above images */
   margin-bottom: 5px; /* Add some white space below images */
-  margin-left: 10px; /* Add some white space to the left */
-  margin-right: 10px; /* Add some white space to the right */
+  margin-left: 15px; /* Add some white space to the left */
+  margin-right: 15px; /* Add some white space to the right */
 }
 
 a
@@ -15,8 +15,8 @@ a
   text-align: center;
   line-height: 1.5em;
   letter-spacing: 0.05em;
-  margin-left: 10px; /* Add some white space to the left */
-  margin-right: 10px; /* Add some white space to the right */
+  margin-left: 15px; /* Add some white space to the left */
+  margin-right: 15px; /* Add some white space to the right */
 }
 
 body
@@ -27,38 +27,38 @@ body
   text-align: center;
   line-height: 1.5em;
   letter-spacing: 0.05em;
-  margin-left: 5px; /* Add some white space to the left */
-  margin-right: 5px; /* Add some white space to the right */
+  margin-left: 15px; /* Add some white space to the left */
+  margin-right: 15px; /* Add some white space to the right */
 }
 
 h1 {
-    color: #302f2f;
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
-    margin-top: 50px; /* Add some white space above h1 headings */
-    margin-left: 10px; /* Add some white space to the left */
-    margin-right: 10px; /* Add some white space to the right */
+  color: #302f2f;
+  font-size: 64px;
+  font-weight: normal;
+  text-align: center;
+  margin-top: 50px; /* Add some white space above h1 headings */
+  margin-left: 15px; /* Add some white space to the left */
+  margin-right: 15px; /* Add some white space to the right */
 }
 
 h2 {
-    color: #e6551c;
-    font-size: 54px;
-    font-weight: normal;
-    text-align: center;
-    margin-top: 50px; /* Add some white space above h2 headings */
-    margin-left: 10px; /* Add some white space to the left */
-    margin-right: 10px; /* Add some white space to the right */
+  color: #e6551c;
+  font-size: 54px;
+  font-weight: normal;
+  text-align: center;
+  margin-top: 50px; /* Add some white space above h2 headings */
+  margin-left: 15px; /* Add some white space to the left */
+  margin-right: 15px; /* Add some white space to the right */
 }
 
 h3 {
-    color: #302f2f;
-    font-size: 36px;
-    font-weight: normal;
-    text-align: center;
-    margin-top: 50px; /* Add some white space above h2 headings */
-    margin-left: 10px; /* Add some white space to the left */
-    margin-right: 10px; /* Add some white space to the right */
+  color: #302f2f;
+  font-size: 36px;
+  font-weight: normal;
+  text-align: center;
+  margin-top: 50px; /* Add some white space above h2 headings */
+  margin-left: 15px; /* Add some white space to the left */
+  margin-right: 15px; /* Add some white space to the right */
 }
 
 /* Add a black background color to the top navigation */
