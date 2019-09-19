@@ -123,15 +123,3 @@ h3 {
   width: 100%;
   height: auto;
 }
-
-/* Rounded corner boxes */
-.rcorners1 
-{
-  border-radius: 25px; /* how rounded the corners are */
-  background: #e00715;
-  padding-left: 7px;
-  padding-right: 7px;
-  width: 100px;
-  height: 18px;  
-  color: white; /* box text colour */
-}
