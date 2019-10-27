@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/mysite.css">
+  </head>
+  <body>
+    <!-- Menu Bar -->
+    <div class="topnav">
+      <a href="/index.html">Home</a>
+      <a href="/resources.html">Resources</a>
+      <a class="active" href="/topics.html">Topics</a>
+      <a href="/talks.html">Talks</a>
+      <a href="/about.html">About</a>
+    </div>
+    
+  
+
+    <h1>Python</h1>
+    <center>Snippets of key Python libraries, methods and method chains that I often use for Data Science. </center>
+
+    <br>
+    <a href="/topics.html"> <<< go back to Topics </a>
+    <br>
+    
+    <h2>Libraries & Defaults</h2>  
+
+    import <span style="background-color:yellow;">numpy</span> as np <br><br>
+
+    import <span style="background-color:yellow;">pandas</span> as pd <br><br>
+
+    import <span style="background-color:yellow;">seaborn</span> as sns; <br>
+    sns.set(); <br>
+    sns.set_style("whitegrid"); <br><br>
+
+    # Show a chart created using matplotlib directly under the code that produces it <br>
+    %<span style="background-color:yellow;">matplotlib</span> inline <br><br>
+
+    # Import pyplot from the matplotlib library, for creating chart <br>
+    from matplotlib import <span style="background-color:yellow;">pyplot</span> as plt <br><br>
+
+    # Configure the aesthetics of the charts <br>
+    plt.rcParams['figure.<span style="background-color:yellow;">figsize</span>'] = (10, 8) <br><br>
+
+
+    <h2>Import Data</h2>  
+
+    df = pd.<span style="background-color:yellow;">read_csv</span>('my_file.csv') <br>
+    
+
+    <h2>Initial Look at Data</h2> 
+
+    <span style="background-color:yellow;">len</span>(df)
+    <br><br>
+
+    df.<span style="background-color:yellow;">shape</span>()
+    <br><br>
+
+    df.<span style="background-color:yellow;">columns</span>
+    <br><br>
+
+    df.<span style="background-color:yellow;">dtypes</span>
+    <br><br>
+
+    df.<span style="background-color:yellow;">head</span>()
+    <br><br>
+
+    df.<span style="background-color:yellow;">tail</span>()
+    <br><br>
+
+    df['col'].<span style="background-color:yellow;">unique</span>()
+    <br><br>
+
+    df.<span style="background-color:yellow;">sample</span>()
+    <br><br>
+
+    df.<span style="background-color:yellow;">describe</span>(include='all')
+    <br><br>
+
+    df['col'].<span style="background-color:yellow;">describe</span>()
+    <br><br>
+
+    df.<span style="background-color:yellow;">info</span>()
+    
+    <h2>Clean and Transform Data</h2>  
+
+    df2 = df1.<span style="background-color:yellow;">copy</span>()
+    <br><br>
+
+    df.<span style="background-color:yellow;">T</span>
+    <br><br>
+
+    df['col'].<span style="background-color:yellow;">astype</span>('category')
+    <br><br>
+
+    df.<span style="background-color:yellow;">rename</span>( columns = {'old_name1':'new_name1', 'old_name2':'new_name2'}, inplace=True )
+    <br><br>
+
+    df = df.<span style="background-color:yellow;">drop</span>(columns=['col1', 'col2'])
+    <br><br>
+
+    df = df.<span style="background-color:yellow;">drop</span>( [0, 1] ) &nbsp;&nbsp;&nbsp;<-- drop rows with index 0 and index 1
+    <br><br>
+
+    df.<span style="background-color:yellow;">dropna</span>() &nbsp;&nbsp;&nbsp;<-- drop rows with any cells containing NaN
+    <br><br>
+
+    df.<span style="background-color:yellow;">fillna</span>(' ')
+    <br><br>
+
+    df.<span style="background-color:yellow;">sort_values</span>(by='col', ascending=False)
+    <br><br>
+    
+    df.<span style="background-color:yellow;">sort_index</span>(ascending=False) &nbsp;&nbsp;&nbsp;<-- useful for sorting a series.
+    <br><br>
+
+    df.<span style="background-color:yellow;">loc</span>[ (df['col1']=='value1') & (df['col2']<='value2'), ['col1', 'col2', 'col3']]
+    <br><br>
+
+    totals = df.loc[ <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'Ancoats':'Woodhouse', <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'Searching for Work':'Preparing for work' <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;].<span style="background-color:yellow;">sum</span>(axis='rows') &nbsp;&nbsp;&nbsp;<-- create totals for a range of columns
+    <br><br>
+
+    df.<span style="background-color:yellow;">iloc</span>[[0,1], 9:15]
+    <br><br>
+
+    df['col'].<span style="background-color:yellow;">value_counts</span>(normalize=True) &nbsp;&nbsp;&nbsp;<-- normalize=True gives proportions rather than integer counts
+    <br><br>
+
+    .<span style="background-color:yellow;">isnull</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">notnull</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">isin</span>( ['value1', 'value2'] )
+    <br><br>
+
+    <span style="background-color:yellow;">~</span> &nbsp;&nbsp;&nbsp;<-- reverses the boolean logic test of what comes after this (like 'NOT')
+    <br><br>
+
+    .<span style="background-color:yellow;">between</span>(20, 35)
+    <br><br>
+
+    .str.<span style="background-color:yellow;">contains</span>('blah')
+    <br><br>
+
+    .str.<span style="background-color:yellow;">startswith</span>('blah')
+    <br><br>
+
+    .str.<span style="background-color:yellow;">endswith</span>('blah')
+    <br><br>
+
+    .<span style="background-color:yellow;">sum</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">count</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">mean</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">median</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">min</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">max</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">quantile</span>( [0.25, 0.75] )
+    <br><br>
+
+    .<span style="background-color:yellow;">std</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">var</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">abs</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">groupby</span>('col').<span style="background-color:yellow;">size</span>()
+    <br><br>
+
+    .<span style="background-color:yellow;">groupby</span>('col').<span style="background-color:yellow;">mean</span>()
+    <br><br>
+
+
+    <h2>Visualise Data</h2> 
+    
+    df['col'].value_counts()<span style="background-color:yellow;">.plot.barh</span>()
+    <br><br>
+
+
+    df['col'].value_counts().plot.barh(color='#deaa02', alpha=0.8, width=0.9); <br>
+    plt.xlabel('Number of UK Python Users'); <br>
+    plt.rcParams['xtick.labelsize']=14 <br>
+    plt.rcParams['ytick.labelsize']=12 <br>
+    plt.rcParams['axes.labelsize'] = 18 <br>
+    plt.rcParams['axes.grid'] = False <br>
+    plt.rcParams['axes.titlesize'] = 14 <br>
+    plt.rcParams['ytick.major.pad']= 4 <br>
+    plt.rcParams['xtick.major.pad']= 4 <br>
+    plt.rcParams['axes.titlepad'] = 10 <br>
+    plt.rcParams['axes.labelpad'] = 10 <br>
+    <br><br>
+
+    df.<span style="background-color:yellow;">groupby</span>( ['col1', 'col2'] )['col3']\<br>
+    .<span style="background-color:yellow;">mean</span>()\<br>
+    .<span style="background-color:yellow;">unstack</span>('col2')\<br>
+    .loc[:, col2val1:col2val2]\<br>
+    .plot.bar()
+    <br><br>
+
+    .plot.scatter(x='', y='')
+    <br><br>
+
+    df['col'].plot.box()
+    <br><br>
+
+    df['col'].plot.hist()
+    <br><br>
+
+    df['col'].plot.kde()
+    <br><br>
+
+    sns.distplot(df['col']);
+    <br><br>
+
+
+    sns.boxplot(df['col']);
+    <br><br>
+    
+    <!--
+    <h2>Publishing Jupyter Notebook HTML</h2> 
+
+    When publishing my findings from data analysis, I don't always want to include the code, or at least hide it by default and provide the option to view it, so that it meets the needs of both technical and non-technical readers. 
+
+    <br><br>
+    Below are useful code snippets to use within Jupyter Notebook NBConvert cells to provide a show/hide code button and hide the code by default. It also hides cell numbers and other edit-mode elements that I don't want to be displayed when publishing my findings.
+    <br><br>
+
+    <h3>Top Cell (JavaScript)</h3>
+
+    <h3>Bottom Cell (JavaScript)</h3>
+    --> 
+
+    <br><br>
+    
+  </body>
+</html>
