@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/mysite.css">
+  </head>
+  <body>
+    <!-- Menu Bar -->
+    <div class="topnav">
+      <a href="/index.html">Home</a>
+      <a href="/resources.html">Resources</a>
+      <a class="active" href="/topics.html">Topics</a>
+      <a href="/talks.html">Talks</a>
+      <a href="/about.html">About</a>
+    </div>
+    
+    <h1>Probability</h1>
+
+    <center>Notes on key probability concepts.</center>
+
+    <br>
+    <a href="/topics.html"> <<< go back to Topics </a>
+    <br>
+    
+ 
+      <h2>Complementary Events</h2>
+
+      The probabilities of all possible events add up to 1. 
+      <br>
+      Therefore, the probability of one event happening = 1 minus the probability of it NOT happening.
+      <br>
+      e.g. the probability of rolling a die and getting a 6 is 1 minus the probability of NOT getting a 6.
+      <br><br>
+      We write this, for a generic event, A, as:
+      <br>
+      P(A) + P(A') = 1
+      <br>
+      => P(A) = 1 - P(A')
+      <br>
+      => P(A') = 1 - P(A)
+      <br>
+      <br>
+
+      We can also say that:
+      <br>
+      P(A) = P(A and B) + P(A and B')
+      <br>
+      Also...
+      <br>
+      P(A') = P(A' and B) + P(A' and B')
+      <br>
+      <br>
+
+
+      <h2>Independent Events</h2>
+
+      If two events, A and B, are independent, then:
+      <br>
+      P(A and B) = P(A) x P(B)
+
+      <br>
+      <br>
+      Also:
+      <br>
+      P(A | B) = P(A)
+
+
+      <h2>Mutually Exclusive Events</h2>
+
+      Two events, A and B, are mutually exclusive if:
+      <br>
+      <br>
+      P(A and B) = 0
+      <br>
+      <br>
+      i.e. A and B would never happen at the same time.
+      <br>
+      <br>
+      An example is the set of even numbers and odd numbers. A number can be even or odd but not both. 
+      <br>
+      P(even and odd) = 0
+      <br>
+      <br>
+      Another way to think about this is that the events have no elements in common.
+
+
+      <h2>The Addition Law of Probability</h2>
+
+      P(A or B) = P(A) + P(B) - P(A and B)
+      <br>
+      <br>
+      <img src="venn.png" width=425 height=300>
+      <br>
+      e.g. in the venn diagram above, the probability that one of my friends chosen at random is studying maths or art is:
+      <br>
+      <br>
+      P(Maths or Art) = P(Maths) + P(Art) - P(Maths and Art)
+      <br>
+      <br>
+      I have 5 friends. 3 do maths, 2 do art. But I don't want to count Tom (who does both maths and art) twice so I need to adjust for that.
+      <br>
+      <br>
+      = 3/5 + 2/5 - 1/5
+      <br>
+      = 4/5
+      <br>
+      <br>
+      i.e. 4 out of my 5 friends do maths or art. (Only 1 friend, Kate, does NOT do maths or art.)
+      <br>
+      <br>
+      This is the same as the <b>union</b> of the 2 sets of elements i.e. the discrete set of elements that exist within the combination of the 2 events.
+      <br>
+      e.g. the blue area in the friends venn diagram:
+      <br>
+      <img src="union.png" width=425 height=300>
+      <br>
+      There are 4 distinct elements (friends) in the union of the maths and arts sets (the blue area) out of a total of 5 friends, therefore the probability of a friend doing maths or art is 4/5 as we found above.
+
+
+      <h2>Tree Diagrams</h2>
+
+      Assuming events are independent, they can be represented on a tree diagram to calculate probabilities of outcomes.
+      <br>
+      <br>
+      Each branch represents the probability of that branch occuring.
+      <br>
+      <br>
+      To get the outcome representing the combination of those branches, we can multiple the probabilities together.
+      <br>
+      <br>
+      e.g. if we flip a coin and then pick a number (1, 2, or 3)...
+      <br>
+      <br>
+      <img src="tree2.png" width=425 height=300>
+
+
+      <h2>Conditional Probability</h2>
+
+      The probability of A "given" B...
+      <br>
+      <br>
+
+      P(A | B) = P(A and B) / P(B)
+
+      <br>
+      <br>
+
+      e.g. in the friends example, the probability a friend is doing art given they are doing maths is the probability the friend is doing maths and art divided by the probability they're doing maths:
+      <br>
+      <br>
+      P(Art | Maths) = P(Art and Maths) / P(Maths)
+      <br>
+      <br>
+      = (1/5) / (3/5)
+      <br>
+      = 1/3
+      <br>
+      <br>
+      i.e. if we only look at the maths friends (3 of them), the number of friends doing both maths and art is 1.
+
+      <h2>General Multiplication Rule</h2>
+
+      P(A and B) = P(A|B)P(B)
+
+      <br><br>
+
+      ...for <b>all</b> events, whether they're independent or not.
+
+      <br><br>
+
+      When A and B are <b>independent</b> events, the independence rule says that P(A|B)=P(A), and therefore the multiplication rule for independent events substitutes P(A) for P(A|B), and is therefore:
+
+      <br><br>
+
+      P(A and B) = P(A)P(B)
+
+
+      <h2>Higher Order Conditional Probability</h2>
+
+      P(A and B and C) = P(C | A and B) x P(B | A) x P(A)
+
+
+      <h2>Total Probability</h2>
+
+      P(A) = P(A|B)P(B) + P(A\B')P(B')
+
+
+      <h2>Bayes Theorem</h2>
+
+      P(A|B) = P(B|A)P(B) / P(A)
+
+      <h2>Counting Rules</h2>
+
+      The probability of an outcome happening is the number of ways that outcome can happen, divided by the total number of possible outcomes. 
+      <br><br>
+      e.g. the probability of an Ace being drawn from a pack of 52 cards is 4/52 because we know there are 4 aces in a pack and that the pack contains 52 cards. 
+      <br><br>
+
+      But what if we don't already know how many possible outcomes there are? How could we calculate them? The answer is 'using counting rules'...
+
+      <h3>Counting Rule 1</h3>
+
+      ...determines the <b>number of possible outcomes for n trials</b>, where the <b>number of possible outcomes remains the same for each trial</b>, for events that are mutually exclusive and exhaustive.
+      <br>
+      e.g. the number of possible outcomes from flipping an ordinary coin three times.
+      <br>
+      <br>
+      The calculation is:
+      <br>
+      <br>
+      &nbsp;&nbsp;n <br>
+      k 
+      <br>
+      <br>
+      ...where n is the number of trials, and k is the number of outcomes for 1 trial.
+      <br>
+      <br>
+      So, for the coin example, it would be:
+      <br>
+      <br>
+      &nbsp;&nbsp;3 <br>
+      2 
+      <br>
+      <br>
+      = 2 x 2 x 2
+      <br>
+      = 8
+      <br>
+      i.e. HHH, HHT, HTH, HTT, THH, THT, TTH, TTT
+      <br>
+      <br>
+      <img src="tree.png" width=375 height=300>
+
+      <h3>Counting Rule 2</h3>
+
+      ...extends counting rule 1 to deal with the situation when the <b>number of possible outcomes differ between trials</b>.
+      <br>
+      e.g. the number of possible combinations of a passcode where the the passcode consists of any 3 letters (A-Z) followed by any 3 numbers (0-9).
+      <br>
+      <br>
+      The calculation is the number of outcomes for each trial, multipled together:
+      <br>
+      (num outcomes from 1st trial) x (num outcomes from 2nd trial) x .....
+      <br>
+      <br>
+      So, for the passcode example:
+      <br>
+      There are 26 outcomes for each of the 3 letters => 26 x 26 x 26.
+      <br>
+      There are 10 outcomes for each of the 3 numbers => 10 x 10 x 10.
+      <br>
+      So, the number of outcomes for the passcodes is:
+      <br>
+      26 x 26 x 26 x 10 x 10 x 10
+      <br>
+      = 17,576,000
+
+
+      <h3>Counting Rule 3</h3>
+
+      ...is used to find the number of ways <b>all</b> n items can be <b>arranged</b>.
+      <br>
+      e.g. how many ways can a red mug, blue mug, and yellow mug be arranged on a shelf?
+      <br>
+      <br>
+      The calculation is:
+      <br>
+      <br>
+      n!
+      <br>
+      <br>
+      So, for the mug example, there are 3 items (3 mugs), so the answer is:
+      <br>
+      <br>
+      3!
+      <br>
+      = 3 x 2 x 1 
+      <br>
+      = 6
+      <br>
+      The scenarios are:
+      <br>
+      RBY, RYB, YRB, YBR, BRY, BYR
+
+
+      <h3>Counting Rule 4 - Permutations</h3>
+
+      Permutations are the number of ways <b>a subset</b> of n objects can be arranged when the <b>order of those objects matters</b>.
+      <br><br>
+      Assumes sampling WITHOUT replacement.
+      <br><br>
+      For example, we treat (A, B) and (B, A) as different events.
+      <br>
+      <br>
+      The number of ways of choosing k distinct items from n, when the <b>order is relevant</b>, is:
+      <br>
+      <br>
+      n <br>
+      &nbsp;&nbsp;P <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;k <br>
+      <br>
+      <br>
+      = n! / (n-k)!
+      <br>
+      <br>
+      e.g. the number of ways to choose 2 items from a set of 3 (e.g. {A, B, C}) is:
+      <br>
+      <br>
+      3 <br>
+      &nbsp;&nbsp;P <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;2 <br>
+      <br>
+      = 3! / (3-2)!
+      <br>
+      = (3 x 2 x 1) / 1
+      <br>
+      = 6
+      <br>
+      <br>
+      The 6 possibilities are:
+      <br>
+      AB, BA, AC, CA, BC, CB
+      <br>
+      <br>
+      Note: 
+      <br>
+      0! = 1
+      <br>
+      1! = 1
+
+
+      <h3>Counting Rule 5 - Combinations</h3>
+
+      Combinations are the number of ways <b>a subset</b> of n objects can be arranged when the order of those objects does <b>not</b> matter.
+      <br><br>
+      Assumes sampling WITHOUT replacement.
+      <br><br>
+      For example, we treat (A, B) and (B, A) as the <b>same</b> event.
+      <br>
+      <br>
+      The number of ways of choosing k distinct items from n, when the <b>order is NOT relevant</b>, is:
+      <br>
+      <br>
+      n <br>
+      &nbsp;&nbsp;C <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;k <br>
+      <br>
+      <br>
+      = n! / [ (n-k)! x k! ]
+      <br>
+      <br>
+      e.g. the number of ways to choose 2 items from a set of 3 (e.g. {A, B, C}), when the order is NOT important is:
+      <br>
+      <br>
+      3 <br>
+      &nbsp;&nbsp;C <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;2 <br>
+      <br>
+      = 3! / [ (3-2)! x 2! ]
+      <br>
+      = (3 x 2 x 1) / (1 x 2)
+      <br>
+      = 6 / 2
+      <br>
+      = 3
+      <br>
+      <br>
+      The 3 possibilities are:
+      <br>
+      AB, AC, BC
+      <br>
+      <br>
+      Note: 
+      <br>
+      0! = 1
+      <br>
+      1! = 1
+
+
+      <h2>Properties of All Probability Distributions</h2>
+
+      The sum of all probabilities for all possible outcomes must equal 1.
+      <br><br>
+
+      The probability for a particular outcome or range of outcomes must be between 0 and 1.
+      <br><br>
+
+      There are two types of distributions for a single random variable:
+      <br><br>
+      Discrete probability distributions for <b>discrete</b> variables.
+      <br><br>
+      Probability density functions for <b>continuous</b> variables.
+
+      <h2>Discrete Probability Distributions</h2>
+
+      A <b>discrete</b>> probability distribution is a list of all possible numerical outcomes, and the probability of each occurring. 
+      <br><br>
+      
+      The sum of the probabilities for that list is equal to 1.
+      <br><br>
+      
+      For example:
+      <br><br>
+
+      The probability distribution for a fair die is:
+      <br><br>
+
+      <table style="width:60%">
+            <tr>
+                  <th>X</th>
+                  <th>P(X=x)</th>
+            </tr>
+            <tr>
+                  <td align="center">1</td>
+                  <td align="center">1/6</td>
+            </tr>
+            <tr>
+                  <td align="center">2</td>
+                  <td align="center">1/6</td>
+            </tr>
+            <tr>
+                  <td align="center">3</td>
+                  <td align="center">1/6</td>
+            </tr>
+            <tr>
+                  <td align="center">4</td>
+                  <td align="center">1/6</td>
+            </tr>
+            <tr>
+                  <td align="center">5</td>
+                  <td align="center">1/6</td>
+            </tr>
+            <tr>
+                  <td align="center">6</td>
+                  <td align="center">1/6</td>
+            </tr>
+      </table>
+
+      The probability distribution for a loaded die, where a 6 is twice as likely as any other outcome, and all other outcomes are equal, is:
+      <br><br>
+
+      <table style="width:60%">
+            <tr>
+                  <th>X</th>
+                  <th>P(X=x)</th>
+            </tr>
+            <tr>
+                  <td align="center">1</td>
+                  <td align="center">1/7</td>
+            </tr>
+            <tr>
+                  <td align="center">2</td>
+                  <td align="center">1/7</td>
+            </tr>
+            <tr>
+                  <td align="center">3</td>
+                  <td align="center">1/7</td>
+            </tr>
+            <tr>
+                  <td align="center">4</td>
+                  <td align="center">1/7</td>
+            </tr>
+            <tr>
+                  <td align="center">5</td>
+                  <td align="center">1/7</td>
+            </tr>
+            <tr>
+                  <td align="center">6</td>
+                  <td align="center">2/7</td>
+            </tr>
+      </table>
+
+      <h2>Expected Value (Mean) of a Discrete Variable</h2>
+
+      The expected value (mean) of a <b>discrete</b> variable, X, can be calculated by multiplying each outcome by its probability and summing those values.
+      <br><br>
+      e.g. in the loaded die example above the expected value (mean) is:
+      <br><br>
+      1*(1/7)
+      <br>
+      +
+      <br>
+      2*(1/7)
+      <br>
+      +
+      <br>
+      3*(1/7)
+      <br>
+      +
+      <br>
+      4*(1/7)
+      <br>
+      +
+      <br>
+      5*(1/7)
+      <br>
+      +
+      <br>
+      6*(2/7)
+      <br><br>
+      = (1+2+3+4+5+12)/7
+      <br>
+      = 27/7
+      <br>
+      = 3.857
+      <br><br>
+      Obviously its not possible to throw a 3.857 as only integer values between 1 and 6 inclusive can be thrown using the die. This number represents the mean average.
+
+      <h2>Variance of a Discrete Variable</h2>
+
+      The variance of a <b>discrete</b> variable can be calculated by multiplying each possible outcome's <b>squared difference</b> to the mean (expected value) by its probability, and then summing those numbers.
+      <br><br>
+
+      e.g. in the loaded die example above, the variance is:
+      <br><br>
+
+      (1 - 3.857)^2 * (1/7)
+      <br>
+      +
+      <br>
+      (2 - 3.857)^2 * (1/7)
+      <br>
+      +
+      <br>
+      (3 - 3.857)^2 * (1/7)
+      <br>
+      +
+      <br>
+      (4 - 3.857)^2 * (1/7)
+      <br>
+      +
+      <br>
+      (5 - 3.857)^2 * (1/7)
+      <br>
+      +
+      <br>
+      (6 - 3.857)^2 * (2/7)
+      <br><br>
+      = 11.28
+
+      <h2>Standard Deviation of a Discrete Variable</h2>
+
+      The standard deviation of a discrete variable is the square root of the variance of the discrete variable.
+      <br><br>
+
+      So, in the loaded die example, the standard deviation is the square root of 11.28, which is 3.36.
+
+      <h2>Types of Discrete Probability Distribution</h2>
+
+      Binomial distribution -  for binary (only 2 outcomes) data e.g. flipping a coin
+      <br><br>
+      Poisson distribution - for 'count' data within a specific interval e.g. the number of cars that pass a checkpoint per hour.
+      <br><br>
+      Uniform distribution - for multiple events with the same probability e.g. rolling a fair die.
+
+      <h2>Binomial Distribution</h2>
+
+      You use the binomial distribution to solve problems where the discrete variable you're interested in is the number of events in a sample of n observations.
+
+      <br><br>
+
+      The binomial distribution's properties are:
+      <ul>
+            <li>There are a fixed number of observations, n, in the sample e.g. 5 ticket machines</li>
+            <li>Each observation is classified in one of two mutually exclusive and collective exhaustive categories e.g. working or broken</li>
+            <li>The probability of an observation being classified as the event of interest (e.g. working), π, is the same from observation to observation. Therefore the probability of an observation being classified as the event NOT of interest (e.g. broken) is 1-π and is also constant from observation to observation.</li>
+            <li>The value of an observation is independent of the value of any other observation. e.g. one ticket machine being broken doesn't affect whether another ticket machine is broken or not.</li>
+      </ul>
+
+      Example:
+      <br><br>
+      
+      A bus station has 5 self-serve ticket machines. The probability of a ticket machine being broken is 0.15. Find the probability that the number of broken machines is exactly 2.
+      <br><br>
+
+      To answer this question, we can use the following calculation, where n is the number of trials and π is the probability of success (the classification of interest).
+      <br><br>
+      
+      <img src="binomial.png" width=400 height=30>
+      <br><br>
+
+      <h3>Examples</h3>
+
+      So in the ticket machine example: 
+      <br><br>
+      π (the probability of the event having the classification of interest, or sometimes known as the probability of success) is 0.15, 
+      <br>
+      n is 5, 
+      <br>
+      and the probability that 2 machines are broken, i.e. P(X=2) is:
+      <br><br>
+      "5 Choose 2" x (0.15)^2 x (0.85)^3
+
+      <br><br><br><br>
+
+      The probability that at least 4 machines are broken is:
+      <br><br>
+      P(X >= 4)
+      <br>
+      = P(X = 4) + P(X = 5)
+      <br>
+      = ["5 Choose 4" x (0.15)^4 x (0.85)^1] + ["5 Choose 5" x (0.15)^5 x (0.85)^0]
+
+      <br><br><br><br>
+
+      The probability that at at most 2 machines are broken is:
+      <br><br>
+      P(X <= 2)
+      <br>
+      = P(X = 2) + P(X = 1)  + P(X = 0) 
+      <br>
+      = ["5 Choose 2" x (0.15)^2 x (0.85)^3] + ["5 Choose 1" x (0.15)^1 x (0.85)^4] + ["5 Choose 0" x (0.15)^0 x (0.85)^5]  
+
+      <h3>Mean (Expected Value) of the Binomial Distribution</h3>
+
+      = nπ 
+
+      <h3>Variance of the Binomial Distribution</h3>
+
+      = nπ(1-π)
+
+      <h3>Standard Deviation of the Binomial Distribution</h3>
+
+      = square root of the variance i.e. SQRT(nπ(1-π))
+
+      <!--
+      <h2>Poisson Distribution</h2>
+      
+      <h2>Continuous Probability Distributions</h2>
+
+      <h2>Properties of Continuous Probability Distribution</h2>
+
+      <h2>Types of Continuous Probability Distribution</h2>
+
+      The most well-known example of a continuous probability distribution is the <b>Normal</b> distribution, which is also known as the Gaussian distribution or the “bell curve.”
+      <br><br>
+      Other examples are the: 
+
+      <br><br> 
+      <b>lognormal</b> distribution
+
+      <br><br>
+      <b>T distribution</b> - for when sample size is small or we don't know the standard deviation of the population.
+
+      <br><br>
+      <b>Chi-square distribution</b> - the Chi Square statistic is commonly used for testing relationships between categorical variables
+
+      <br><br>
+      <b>F distribution</b> - the main use of F-distribution is to test whether two independent samples have been drawn from the normal populations with the same variance or if two independent estimates of the population variance are homogeneous or not, since it is often desirable to compare two variances rather than two averages.
+
+      <h2>Mean, Variance and Standard Deviation</h2>
+
+      The Mean (also sometimes known as the Expected Value)...
+
+
+      <h2>Markov's Inequality</h2>
+
+
+      <h2>Chebychev's Theorem</h2>
+
+
+      <h2>Normal Distribution</h2>
+
+
+      <h2>Distribution of the Sample Mean</h2>
+
+
+      <h2>Central Limit Theorem</h2>
+
+
+      <h2>Distribution of Sample Total</h2>
+
+
+      <h2>Inverse CDF</h2>
+
+      -->
+
+
+
+    <br>
+    <br>
+    
+  </body>
+</html>
