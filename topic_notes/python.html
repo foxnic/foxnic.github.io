@@ -94,6 +94,17 @@
 
     df.<span style="background-color:yellow;">rename</span>( columns = {'old_name1':'new_name1', 'old_name2':'new_name2'}, inplace=True )
     <br><br>
+    
+    df['col'].<span style="background-color:yellow;">map</span>( {1: 'Diabetic', 0:'Non-Diabetic'} )
+    <br><br>
+
+    pd.<span style="background-color:yellow;">cut</span>( df['col'], <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bins=[0, 3, 5,...], <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; labels=['low', 'med', 'high', ...], <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; right=False, <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include_lowest=True <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )
+    <br><br>
 
     df = df.<span style="background-color:yellow;">drop</span>(columns=['col1', 'col2'])
     <br><br>
@@ -188,6 +199,30 @@
     .<span style="background-color:yellow;">groupby</span>('col').<span style="background-color:yellow;">mean</span>()
     <br><br>
 
+    pd.<span style="background-color:yellow;">merge</span>(df1, df2, how='outer')
+    <br><br>
+
+    df1.<span style="background-color:yellow;">columns</span> <span style="background-color:yellow;">&</span> df2.<span style="background-color:yellow;">columns</span> &nbsp;&nbsp;&nbsp;<-- find columns in common
+    <br><br>
+
+    df1.<span style="background-color:yellow;">merge</span>(df2, <span style="background-color:yellow;">on</span>='col')
+    <br><br>
+
+    df1.<span style="background-color:yellow;">merge</span>(df2, <span style="background-color:yellow;">left_on</span>='col1', <span style="background-color:yellow;">right_on</span>='col2')
+    <br><br>
+
+    df1.<span style="background-color:yellow;">merge</span>(df2, left_on='col1', <span style="background-color:yellow;">right_index=True</span>)
+    <br><br>
+
+    df1\ <br>
+    .merge(df2, on='col')\ <br>
+    .merge(df3, on='col2')\ <br>
+    .merge(df4.<span style="background-color:yellow;">query</span>(' col3 == "value1" '), on='col4' )\ <br>
+    .sort_values('col5')\ <br>
+    .tail(10)\ <br>
+    [['colX', 'colY', 'colZ']] <br>
+
+    
 
     <h2>Visualise Data</h2> 
     
