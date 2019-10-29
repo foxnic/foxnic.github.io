@@ -141,3 +141,30 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
+details {
+  font: 22px "Verdana", sans-serif;
+  width: 800px;
+}
+
+details > summary {
+  padding: 2px 6px;
+  width: 20em;
+  color: white;
+  background-color: #e6551c;
+  border: none;
+  box-shadow: 3px 3px 4px #302f2f;
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > p {
+  border-radius: 0 0 10px 10px;
+  background-color: #302f2f;
+  padding: 2px 6px;
+  margin: 0;
+  box-shadow: 3px 3px 4px #302f2f;
+}
+
