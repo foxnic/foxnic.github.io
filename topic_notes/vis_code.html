@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/mysite.css">
+  </head>
+  <body>
+    <!-- Menu Bar -->
+    <div class="topnav">
+      <a href="/index.html">Home</a>
+      <a href="/resources.html">Resources</a>
+      <a class="active" href="/topics.html">Topics</a>
+      <a href="/talks.html">Talks</a>
+      <a href="/about.html">About</a>
+    </div>
+    
+    <h1> Data Visualisation Examples - With Code </h1>
+
+    Data visualisation examples of common combinations of variable types. The data used in these visualisations is the <a href="https://www.gapminder.org/">GapMinder data</a> on life expectancy per year per country, and <a href="https://www.motherjones.com/politics/2012/12/mass-shootings-mother-jones-full-data/">Mother Jones data on US Mass Shootings 1982-2018</a> 
+    <br><br>
+
+
+    <br>
+    <a href="vis.html"> Go to version without code </a>
+    <br><br>
+
+    <h2> Python Libraries and Config </h2>
+    <br>
+    %matplotlib inline <br>
+    import numpy as np <br>
+    import pandas as pd <br>
+    import matplotlib.pyplot as plt <br>
+    import seaborn as sns; sns.set() <br>
+    sns.set(style="ticks", color_codes=True) <br>
+    sns.set_context("notebook") <br>
+    sns.set({ "figure.figsize": (12/1.5,8/1.5) }) <br>
+    sns.set_style("white", {'axes.edgecolor':'gray'}) <br>
+
+    <h2> One Numerical Variable </h2>
+    <br>
+
+    <div class="boxy"><img src="hist.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    df['lifeExp'].plot.hist(bins=20, color='#3A0B64'); <br>
+    plt.title('Histogram', fontsize=18, color='#3F3F41'); <br>
+    plt.ylabel('Frequency', fontsize=14, color='#3F3F41'); <br>
+    plt.xlabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="kde.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    df['lifeExp'].plot.kde(color='#58186C'); <br>
+    plt.title('Kernel Density Estimate (KDE)', fontsize=18, color='#3F3F41'); <br>
+    plt.ylabel('Density', fontsize=14, color='#3F3F41'); <br>
+    plt.xlabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="dist2.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.distplot(df['lifeExp'], color='#77286A'); <br>
+    plt.title('Distribution Plot', fontsize=18, color='#3F3F41'); <br>
+    plt.ylabel('Density', fontsize=14, color='#3F3F41'); <br>
+    plt.xlabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="box2.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.boxplot(df['lifeExp'], color='#B0385E'); <br>
+    plt.title('Box Plot', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(left=True); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="violin2.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.violinplot(df['lifeExp'], color='#E46855'); <br>
+    plt.title('Violin Plot', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(left=True); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="strip2.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.stripplot(x='lifeExp', data=df, color='#E2AD51', alpha=0.6, jitter=True); <br>
+    plt.title('Strip Plot', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(left=True); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="boxstrip2.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    cur_ax = sns.boxplot(x='lifeExp', data=df, color='#E8725F') <br>
+    sns.stripplot(x='lifeExp', data=df, jitter=True, linewidth=0.5, ax=cur_ax, color='#FEDFA5'); <br>
+    plt.title('Box + Strip Plot', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(left=True); <br>
+    <br><br><br>
+
+   
+
+    
+
+    <h2>One Categorical Variable </h2>
+    <br>
+
+    <div class="boxy"><img src="freq.png" height=250></div>
+    <br><br>
+    <b>Python code:</b><br>
+    continent_le = pd.DataFrame(df['continent'].value_counts()) <br>
+    continent_le.reset_index(inplace=True) <br>
+    continent_le.columns = ['Continent', 'Frequency'] <br>
+    continent_le <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="us_tree.png" height=500></div>
+    <br><br><br>
+
+    <div class="boxy"><img src="us_bigolnum.png" height=200></div>
+    <br><br><br>
+
+    <div class="boxy"><img src="us_bar.png" height=500></div>
+    <br><br><br>
+
+    <div class="boxy"><img src="us_lol.png" height=500></div>
+    <br><br><br>
+
+    <div class="boxy"><img src="us_waffle.png" height=225></div>
+    <br><br><br>
+
+    <div class="boxy"><img src="dot3.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    # Prepare Data <br>
+    dot_df = df.groupby('continent').size().reset_index(name='counts').sort_values('counts', ascending=False) <br>
+    <br>
+    # Draw plot <br>
+    fig, ax = plt.subplots(figsize=(16,8), dpi= 80) <br>
+    ax.hlines(y=dot_df.continent, xmin=0, xmax=650, color='gray', alpha=0.7, linewidth=1, linestyles='dashdot') <br>
+    ax.scatter(y=dot_df.continent, x=dot_df.counts, s=400, color='#58186C', alpha=0.7) <br>
+    <br>
+    # Title, Label, Ticks and Ylim <br>
+    plt.title('Dot Plot', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Frequency', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(left=True); <br>
+    plt.show() <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="barh.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    continent_le.plot.barh(x='Continent', y='Frequency', color='#3A0B64', width=0.9); <br>
+    plt.title('Horizontal Bar Plot', fontsize=18, color='#3F3F41'); <br>
+    plt.ylabel(None); <br>
+    plt.xlabel('Frequency', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    plt.legend().set_visible(False); <br>
+    sns.despine(left=True); <br>
+    <br><br><br>
+
+    
+    
+    
+
+    <h2> One Category and One Number </h2>
+    <br>
+
+    <div class="boxy"><img src="freq2.png" height=250></div>
+    <br><br>
+    <b>Python code:</b><br>
+    cont_le_ft = pd.DataFrame(df.groupby(by=['continent'])['lifeExp'].median().round(2)) <br>
+    cont_le_ft.reset_index(inplace=True) <br>
+    cont_le_ft.columns = ['Continent', 'Median_life_exp'] <br>
+    cont_le_ft <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="us_map.png" height=500></div>
+    <br><br><br>
+
+    <div class="boxy"><img src="multibox2.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    with sns.color_palette("BuPu"): <br>
+    sns.boxplot(x='continent', y='lifeExp', data=df , order=["Africa", "Asia", "Americas", "Europe", "Oceania"]); <br>
+    plt.title('Box Plots', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Continent', fontsize=14, color='#3F3F41'); <br>
+    plt.ylabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="multiviolin2.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    with sns.color_palette("BuPu"): <br>
+    sns.violinplot(x='continent', y='lifeExp', data=df, order=["Africa", "Asia", "Americas", "Europe", "Oceania"]); <br>
+    plt.title('Violin Plots', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Continent', fontsize=14, color='#3F3F41'); <br>
+    plt.ylabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="multistrip.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    with sns.color_palette("BuPu"): <br>
+    sns.stripplot(x='continent', y='lifeExp', data=df, alpha=0.7,
+              order=["Africa", "Asia", "Americas", "Europe", "Oceania"],
+              jitter=True); <br>
+    plt.title('Strip Plots', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Continent', fontsize=14, color='#3F3F41'); <br>
+    plt.ylabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="multiboxstrip.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    with sns.color_palette("BuPu"): <br>
+    cur_ax = sns.boxplot(x='continent', y='lifeExp', data=df,
+              order=["Africa", "Asia", "Americas", "Europe", "Oceania"])
+sns.stripplot(x='continent', y='lifeExp', data=df, 
+              order=["Africa", "Asia", "Americas", "Europe", "Oceania"],
+              jitter=True, linewidth=0.5, color='#f5f5f5', ax=cur_ax); <br>
+    plt.title('Box & Strip Plots', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Continent', fontsize=14, color='#3F3F41'); <br>
+    plt.ylabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="barh2.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    cont_le_ft = pd.DataFrame(df.groupby(by=['continent'])['lifeExp'].median().round(2)) <br>
+    cont_le_ft.reset_index(inplace=True) <br>
+    cont_le_ft.columns = ['Continent', 'Median_life_exp'] <br>
+    cont_le_ft.sort_values('Median_life_exp', ascending=False)\ <br>
+    .plot.barh(x='Continent', y='Median_life_exp', color='#B0385E', width=0.9); <br>
+    plt.title('Horizontal Bar Plot', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Median Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.ylabel(None); <br>
+    plt.legend().set_visible(False); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(left=True); <br>
+
+    <br><br><br>
+
+    <div class="boxy"><img src="dot4.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    cont_le_ft = cont_le_ft.sort_values('Median_life_exp', ascending=False) <br>
+    fig, ax = plt.subplots(figsize=(16,8), dpi= 80) <br>
+    ax.hlines(y=cont_le_ft.Continent, xmin=0, xmax=100, color='gray', alpha=0.8, linewidth=1, linestyles='dashdot') <br>
+    ax.scatter(y=cont_le_ft.Continent, x=cont_le_ft.Median_life_exp, s=400, color='#E46855') <br>
+    <br>
+    plt.title('Dot Plot', fontsize=18, color='#3F3F41'); <br>
+    plt.ylabel(None); <br>
+    plt.xlabel('Median Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    plt.xlim(45, 75); <br>
+    sns.despine(left=True); <br>
+    plt.show() <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="us_lol2.png" height=500></div>
+    <br><br><br>
+
+    
+
+
+    
+    <h2>Two Numerical Variables </h2>
+    <br>
+
+    <div class="boxy"><img src="scatter.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    df_2007 = df.loc[df['year']==2007] <br>
+    sns.scatterplot(data=df_2007, x='gdpPercap', y='lifeExp', color='#3A0B64', alpha=0.6, s=75); <br>
+    plt.title('Scatter Plot - Life Expectancy Vs GDP in 2007', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('GDP Per Capita', fontsize=14, color='#3F3F41'); <br>
+    plt.ylabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="joint.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.jointplot(data=df_2007, x='gdpPercap', y='lifeExp', height=7, color='#77286A', alpha=0.6, s=75);
+    <br><br><br>
+
+    <div class="boxy"><img src="jointreg.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.jointplot(data=df_2007, x='gdpPercap', y='lifeExp', color='#B0385E', height=7, kind="reg");
+    <br><br><br>
+
+    <div class="boxy"><img src="jointhex.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.jointplot(data=df_2007, x='gdpPercap', y='lifeExp', color='#E46855', height=7, kind="hex");
+    <br><br><br>
+
+    <div class="boxy"><img src="jointkde.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.jointplot(data=df_2007, x='gdpPercap', y='lifeExp', color='#EBA575', height=7, kind="kde");
+    <br><br><br>
+
+    
+
+
+    <h2>Two Categories and One Number </h2>
+    <br>
+
+    <div class="boxy"><img src="us_stackedbar.png" height=500></div>
+    <br><br><br>
+
+    <div class="boxy"><img src="dumb.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    import matplotlib.lines as mlines <br>
+    <br>
+    # Function to draw line segments <br>
+    def newline(p1, p2): <br>
+        ax = plt.gca() <br>
+        l = mlines.Line2D([p1[0],p2[0]], [p1[1],p2[1]], color='#c2c0c0', alpha=0.5, linestyle='--', linewidth=3, zorder=1) <br>
+        ax.add_line(l) <br>
+        return l <br>
+    <br>
+    # Figure and Axes <br>
+    fig, ax = plt.subplots(1,1,figsize=(16,8),  dpi= 80) <br>
+    <br>
+    # Points <br>
+    ax.scatter(y=df_2yrs['continent'], x=df_2yrs['1952'], s=400, color='#E5825B', zorder=2) <br>
+    ax.scatter(y=df_2yrs['continent'], x=df_2yrs['2007'], s=400, color='#B0385E', zorder=3) <br>
+    ax.legend(['1952','2007'], loc='upper left', ncol=2, title='Legend') <br>
+    <br>
+    # Line Segments <br>
+    for i, p1, p2 in zip(df_2yrs['continent'], df_2yrs['1952'], df_2yrs['2007']): <br>
+        newline([p1, i], [p2, i]) <br>
+    <br>
+    # Aesthetics <br>
+    plt.title('Dumbell Chart', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Median Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.ylabel(None); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    <br>
+    sns.despine(left=True); <br>
+    plt.show() <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="us_bubble.png" height=500></div>
+    <br><br><br>
+
+    <div class="boxy"><img src="multiscatter.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.scatterplot(data=two_cats_ft, x='year', y='median_life_exp', hue='continent', alpha=0.6, s=75); <br>
+    plt.title('Scatter Plot - Life Expectancy 1952-2007', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Year', fontsize=14, color='#3F3F41'); <br>
+    plt.ylabel('Median Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine() <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="facetedscatter.png" height=650></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.catplot(data=two_cats_ft, x='year', y='median_life_exp', col='continent', col_wrap=3, s=6);
+    <br><br><br>
+
+    <div class="boxy"><img src="groupbar.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    df_2yrs = df.loc[ <br>
+    (df['year']==1952) | <br>
+    (df['year']==2007) <br>
+    ] <br>
+    with sns.color_palette("BuPu"): <br>
+        df_2yrs.groupby(by=['year', 'continent'])['lifeExp'].median().unstack().plot.bar(); <br>
+    plt.legend(title=None); <br>
+    plt.title('Grouped Bar Plot', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel(None); <br>
+    plt.ylabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="facetbar.png" height=250></div>
+    <br><br>
+    <b>Python code:</b><br>
+    df_2yrs_2 = df.loc[ <br>
+    (df['year']==1952) | <br>
+    (df['year']==2007) <br>
+    ] <br>
+    <br>
+    df_2yrs_2 = pd.DataFrame(df_2yrs_2.groupby(by=['year', 'continent'])['lifeExp'].median()) <br>
+    df_2yrs_2.reset_index(inplace=True) <br>
+    df_2yrs_2.columns = ['year', 'continent', 'med_lifeExp'] <br>
+    <br>
+    with sns.color_palette("BuPu"): <br>
+    sns.catplot(x="year", y="med_lifeExp", col="continent", col_wrap=3,
+                 data=df_2yrs_2, kind="bar", height=2.5, aspect=.8); <br>
+
+    <br><br><br>
+
+    
+
+
+    <h2> Two Numbers and One Category </h2>
+    <br>
+
+    <div class="boxy"><img src="scatter2cat.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    df_2007_no_nulls = df.loc[ <br>
+    (df['year']==2007) & <br>
+    (df['pop'].notnull()) & <br>
+    (df['gdpPercap'].notnull()) & <br>
+    (df['lifeExp'].notnull()) <br>
+    ] <br>
+    <br>
+    sns.scatterplot(data=df_2007_no_nulls, x='gdpPercap', y='lifeExp', hue='continent', s=75, alpha=0.7); <br>
+    plt.legend(loc='lower right'); <br>
+    plt.ylim(35, 90); <br>
+    <br>
+    plt.title('Scatter Plot with Hue Assigned to a Category', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('GDP Per Capita', fontsize=14, color='#3F3F41'); <br>
+    plt.ylabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    <br>
+    plt.text(5500, 39, "Swaziland", horizontalalignment='left', size='large', color='gray') <br>
+    plt.text(30000, 84, "Japan", horizontalalignment='left', size='large', color='gray') <br>
+    plt.text(50000, 80, "Norway", horizontalalignment='left', size='large', color='gray') <br>
+    sns.despine(); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="facetedscatter2.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.relplot(x="gdpPercap", y="lifeExp", col="continent", s=75, color='#E5825B', alpha=0.6,
+            data=df_2007_no_nulls, height=4, col_wrap=3);
+    <br><br><br>
+
+    
+
+    <h2>Three Numerical Variables </h2>
+    <br>
+
+    <div class="boxy"><img src="scat3.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    three_num_vars = df_2007_no_nulls.loc[:,  ['lifeExp', 'pop', 'gdpPercap']] <br>
+    sns.scatterplot(data=three_num_vars, x='pop', y='lifeExp', hue='gdpPercap', s=75, alpha=0.9).set(xscale="log"); <br>
+    plt.legend(loc='lower right'); <br>
+    plt.ylim(30, 90); <br>
+    plt.title('Scatter Plot with Hue Assigned to a Number', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Population (Log Scale)', fontsize=14, color='#3F3F41'); <br>
+    plt.ylabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="corr.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    # Generate a mask for the upper triangle <br>
+    mask = np.zeros_like(three_num_vars.corr(), dtype=np.bool) <br>
+    mask[np.triu_indices_from(mask)] = True <br>
+    <br>
+    # Set up the matplotlib figure <br>
+    f, ax = plt.subplots(figsize=(16,8), dpi= 80) <br>
+    <br>
+    # Draw the heatmap with the mask and correct aspect ratio <br>
+    sns.heatmap(three_num_vars.corr(), 
+                mask=mask, 
+                cmap=sns.diverging_palette(220, 10, as_cmap=True),
+                annot=True,
+                annot_kws={"fontsize":14},
+                vmin=-1,
+                vmax=1, 
+                center=0,
+                square=True, 
+                linewidths=.5, 
+                cbar_kws={"shrink": .5}); <br>
+    <br>
+    plt.title('Correlogram', fontsize=18, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(left=False); <br>
+    <br><br><br>
+
+    <div class="boxy"><img src="pair.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    with sns.color_palette("Purples_r"):
+    sns.pairplot(three_num_vars, height=3, kind="reg");
+    <br><br><br>
+
+    <br>
+    <br>
+    
+  </body>
+</html>
