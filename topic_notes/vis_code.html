@@ -170,7 +170,8 @@
     <br><br>
     <b>Python code:</b><br>
     # Prepare Data <br>
-    dot_df = df.groupby('continent').size().reset_index(name='counts').sort_values('counts', ascending=False) <br>
+    dot_df = df.groupby('continent').size().reset_index(name='counts').\  <br>
+    sort_values('counts', ascending=False) <br>
     <br>
     # Draw plot <br>
     fig, ax = plt.subplots(figsize=(16,8), dpi= 80) <br>
