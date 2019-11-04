@@ -642,6 +642,25 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
     <hr>
     <br><br>
 
+    <div class="boxy"><img src="splitviolin.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.violinplot(data=df.loc[ df['year'].isin([1952, 2007]) ], <br>
+              x='continent', <br>
+              y='lifeExp', <br>
+              hue='year', <br>
+              split=True, <br>
+              palette=['#C85370', '#FEDFA5']); <br>
+    plt.legend(title=None); <br>
+    plt.title('Split Violin Plot (1 Num, 1 Cat, 1 Binary Cat)', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel(None); <br>
+    plt.ylabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine(); <br>
+    <br>
+    <hr>
+    <br><br>
+
     <div class="boxy"><img src="us_bubble.png" height=500></div>
     <br><br>
     <b>R code:</b><br>
