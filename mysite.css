@@ -116,7 +116,7 @@ h3 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-top: 5px; /* Add some white space above images */
   margin-bottom: 5px; /* Add some white space below images */
-  max-width: 850px;
+  max-width: 900px;
 }
 
 .boxy img 
