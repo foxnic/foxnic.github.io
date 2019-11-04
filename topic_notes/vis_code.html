@@ -18,12 +18,11 @@
     Data visualisation examples of common combinations of variable types. The data used in these visualisations is the <a href="https://www.gapminder.org/">GapMinder data</a> on life expectancy per year per country, and <a href="https://www.motherjones.com/politics/2012/12/mass-shootings-mother-jones-full-data/">Mother Jones data on US Mass Shootings (downloaded Feb 2019))</a> 
     <br><br>
 
-    <br>
-    <a href="vis.html"> Go to version without code </a>
+    <a href="vis.html"> See visualisations without code </a>
     <br><br>
 
     <h2> Python Libraries and Config </h2>
-    <br>
+    
     %matplotlib inline <br>
     import numpy as np <br>
     import pandas as pd <br>
@@ -34,6 +33,21 @@
     sns.set({ "figure.figsize": (12/1.5,8/1.5) }) <br>
     sns.set_style("white", {'axes.edgecolor':'gray'}) <br>
 
+
+    <h2> R Libraries </h2>
+    
+    library(tidyverse) <br>
+    library(operators) <br>
+    library(magrittr) <br>
+    library(dplyr) <br>
+    library(knitr) <br>
+    library(sf) <br>
+    library(usmap) <br>
+    library(waffle) <br>
+    library(treemapify) <br>
+    library(viridis) <br>
+
+    
     <h2> One Numerical Variable </h2>
     <br>
 
@@ -122,7 +136,6 @@
     plt.tick_params(labelsize=14, color='#3F3F41'); <br>
     sns.despine(left=True); <br>
     <br>
-    <hr>
     <br><br>
 
    
@@ -131,6 +144,26 @@
     <br>
 
     <div class="boxy"><img src="us_tree.png" height=500></div>
+    <br><br>
+    <b>R code:</b><br>
+    # Create a new data frame that shows number of shootings by state <br>
+    shootings_per_state <- data.frame(table(cleansed_data$state)) <br> <br>
+
+    # Change the column heading names to "state" and "shootings" <br>
+    colnames(shootings_per_state) <- c("state", "shootings") <br> <br>
+
+    # Create a treemap chart of the shootings per state <br>
+    treemap_state_shootings <- ggplot(shootings_per_state, aes(area = shootings, label = state)) + <br>
+    theme( <br>
+    legend.position = "top", <br>
+    legend.title = element_text(colour = "#666666", size = 16), <br>
+    legend.text = element_text(colour = "#666666", size = 16))+ <br>
+    geom_treemap(aes(alpha = shootings), fill = colour_palette[20]) + <br>
+    geom_treemap_text(colour = "white", place = "centre", <br>
+                    grow = TRUE) <br> <br>
+
+    # Display the treemap chart of shootings per state <br>
+    treemap_state_shootings <br>
     <br>
     <hr>
     <br><br>
@@ -152,16 +185,105 @@
     <br><br>
 
     <div class="boxy"><img src="us_bar.png" height=500></div>
+    <br><br>
+    <b>R code:</b><br>
+    # Create a new column called decade and populate it with the decade of each shooting  <br> 
+    cleansed_data$decade <- case_when( <br>
+        cleansed_data$year < "1990" ~ "1980-1989", <br>
+        cleansed_data$year > "1989" & cleansed_data$year < "2000" ~"1990-1999", <br>
+        cleansed_data$year > "1999" & cleansed_data$year < "2010" ~"2000-2009", <br>
+        cleansed_data$year > "2009" & cleansed_data$year < "2020" ~"2010-2019" <br>
+    ) <br> <br>
+
+    # Create a new data frame that shows number of shootings per decade <br>
+    shootings_per_decade <- data.frame(table(cleansed_data$decade)) <br> <br>
+
+    # Change the column heading names to "decade" and "shootings" <br>
+    colnames(shootings_per_decade) <- c("decade", "shootings") <br> <br>
+
+    # Create a bar chart using ggplot2 to show shootings by decade <br>
+    plot_decade <- ggplot(shootings_per_decade, aes(y=shootings, x=decade)) +  <br>
+      geom_bar(position="dodge", stat="identity", fill = colour_palette[47]) + <br>
+      labs(x = "Decade", <br>
+           y = "Number of mass shootings") + <br>
+      geom_text(aes(label=shootings), vjust = -0.5, size = 8, col = "#666666", fontface = "bold") + <br>
+      theme( <br>
+        axis.text.y = element_blank(), <br>
+        axis.text.x = element_text(colour = "#666666", size = 22), <br>
+        axis.ticks = element_blank(), <br>
+        axis.title.y = element_text(colour = "#666666", size = 18), <br>
+        axis.title.x = element_blank(),  <br>
+        panel.background = element_blank(), <br>
+        axis.line.x = element_line(colour = "#666666"), <br>
+        plot.margin=unit(c(1,0,1,0),"cm")) + <br>
+        coord_cartesian(ylim=c(0,70)) <br> <br>
+
+    # Display the chart  <br>
+    plot_decade <br>
     <br>
     <hr>
     <br><br>
 
     <div class="boxy"><img src="us_lol.png" height=500></div>
+    <br><br>
+    <b>R code:</b><br>
+    # Create a new data frame that shows number of shootings per race <br>
+    shootings_per_race <- data.frame(table(cleansed_data$race)) <br> <br>
+
+    # Change the column heading names to "race" and "shootings" <br>
+    colnames(shootings_per_race) <- c("race", "shootings") <br> <br>
+
+    # Create a lollipop chart using ggplot2 to show number of shootings per race <br>
+    lollipop_race <- ggplot(shootings_per_race, aes(y=shootings, x=reorder(race, -shootings))) + <br>
+      geom_segment( aes(x = race, xend=race, y=0, yend=shootings),  <br>
+                    color = "#e0e1e2",  <br>
+                    size = 2) + <br>
+      geom_point( size=15,  <br>
+                  color=colour_palette[20], <br> 
+                  fill=colour_palette[20],  <br>
+                  shape=21 <br>
+                  ) + <br>
+      labs(y = "Number of mass shootings") + <br>
+      geom_text(aes(label=shootings),hjust=0.5, vjust=0.5, color = "#FFFFFF", size = 9) + <br>
+      theme( <br>
+        axis.text.y = element_blank(), <br>
+        axis.text.x = element_text(colour = "#666666", size = 14), <br>
+        axis.ticks = element_blank(), <br>
+        axis.title.y = element_text(colour = "#666666", size = 18), <br>
+        axis.title.x = element_blank(), <br>
+        panel.background = element_blank(), <br>
+        axis.line.x = element_line(colour = "#666666"), <br>
+        plot.margin=unit(c(1,0,1,0),"cm"))+ <br>
+        coord_cartesian(ylim=c(0,70)) <br> <br>
+
+    # Display the chart <br>
+    lollipop_race <br>
     <br>
     <hr>
     <br><br>
 
     <div class="boxy"><img src="us_waffle.png" height=225></div>
+    <br><br>
+    <b>R code:</b><br>
+    # Create a new column called semi_auto_used and  <br>
+    # populate it with Yes or No depending on whether the shooter used a semi-automatic weapon <br>
+    cleansed_data$semi_auto_used <- "No" <br>
+    cleansed_data[grep("automatic", cleansed_data$weapon_type, ignore.case = TRUE), "semi_auto_used"] <- "Yes" <br> <br>
+
+    # Create a new data frame that shows number of shootings by whether semi automatic weapons were used <br>
+    shootings_per_semi <- data.frame(table(cleansed_data$semi_auto_used)) <br> <br>
+
+    # Change the column heading names to "semi automatic weapon used" and "shootings" <br>
+    colnames(shootings_per_semi) <- c("semi_auto_used", "shootings") <br> <br>
+
+    # Add a Percentage column containing the % of shootings for each category (yes, no) <br>
+    shootings_per_semi$percentage <- round(shootings_per_semi$shootings / sum(shootings_per_semi$shootings) * 100, 0) <br> <br>
+
+    # Create a waffle chart <br>
+    semi_auto_waffle <- waffle(c('Yes'=65, 'No'=35), rows = 4, colors = c('Yes'= colour_palette[70], 'No'=colour_palette[95])) <br> <br>
+
+    # Display the waffle chart <br>
+    semi_auto_waffle <br>
     <br>
     <hr>
     <br><br>
@@ -199,18 +321,12 @@
     plt.legend().set_visible(False); <br>
     sns.despine(left=True); <br>
     <br>
-    <hr>
     <br><br>
 
     
 
     <h2> One Category and One Number </h2>
     <br>
-
-    <div class="boxy"><img src="us_map.png" height=500></div>
-    <br>
-    <hr>
-    <br><br>
 
     <div class="boxy"><img src="multibox2.png" height=500></div>
     <br><br>
@@ -285,6 +401,32 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
     <hr>
     <br><br>
 
+    <div class="boxy"><img src="us_map.png" height=500></div>
+    <br><br>
+    <b>R code:</b><br>
+    # Create a new data frame that shows number of victims by state <br>
+    victims_by_state <- aggregate(cleansed_data$total_victims, by=list(cleansed_data$state), FUN = sum) <br> <br>
+
+    # Change the column heading names to "state" and "victims" <br>
+    colnames(victims_by_state) <- c("state", "victims") <br> <br>
+
+    # Create a chart showing the states on a map of the US and shade the states by the number of victims <br>
+    plot_state_map_victims <- plot_usmap(data = victims_by_state, values = "victims",  <br>
+      regions = "states", labels = TRUE, label_color = "white") + <br>
+      scale_fill_continuous(low = colour_palette[50], high = colour_palette[20],  <br>
+      na.value = "white", name = "victims") + <br>
+      theme( <br>
+        legend.position = "top",  <br>
+        legend.title = element_text(colour = "#666666", size = 16, vjust = 0.75), <br>
+        legend.text = element_text(colour = "#666666", size = 8), <br>
+        plot.margin=unit(c(1,0,1,0),"cm")) <br> <br>
+      
+    # Display the map chart <br>
+    plot_state_map_victims <br>
+    <br>
+    <hr>
+    <br><br>
+
     <div class="boxy"><img src="barh2.png" height=500></div>
     <br><br>
     <b>Python code:</b><br>
@@ -324,11 +466,41 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
     <br><br>
 
     <div class="boxy"><img src="us_lol2.png" height=500></div>
-    <br>
-    <hr>
     <br><br>
+    <b>R code:</b><br>
+    # Create a new data frame that shows number of shootings by location type <br>
+    shootings_per_loc_type <- data.frame(table(cleansed_data$location.1)) <br> <br>
 
-    
+    # Change the column heading names to "location.1" and "shootings" <br>
+    colnames(shootings_per_loc_type) <- c("location.1", "shootings") <br> <br>
+
+    # Create a lollipop chart using ggplot2 to show number of shootings per location type <br>
+    lollipop_loc_type <- ggplot(shootings_per_loc_type, aes(y = shootings, x=location.1)) + <br>
+      geom_segment( aes(x = location.1, xend=location.1, y=0, yend=shootings),  <br>
+                    color = "#e0e1e2",  <br>
+                    size = 2) + <br>
+      geom_point( size=15,  <br>
+                  color="#e1ad46",  <br>
+                  fill="#e1ad46",  <br>
+                  shape=21 <br>
+                  ) + <br>
+      labs(y = "Number of mass shootings") + <br>
+      geom_text(aes(label=shootings),hjust=0.5, vjust=0.5, color = "#FFFFFF", size = 9) + <br>
+      theme( <br>
+        axis.text.y = element_blank(), <br>
+        axis.text.x = element_text(colour = "#666666", size = 22), <br>
+        axis.ticks = element_blank(), <br>
+        axis.title.y = element_text(colour = "#666666", size = 18), <br>
+        axis.title.x = element_blank(), <br>
+        panel.background = element_blank(), <br>
+        axis.line.x = element_line(colour = "#666666"), <br>
+        plot.margin=unit(c(1,0,1,0),"cm"))+ <br>
+        coord_cartesian(ylim=c(0,50)) <br> <br>
+
+    # Display the chart <br>
+    lollipop_loc_type <br>
+    <br>
+    <br><br>
 
 
     
@@ -378,7 +550,6 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
     <b>Python code:</b><br>
     sns.jointplot(data=df_2007, x='gdpPercap', y='lifeExp', color='#EBA575', height=7, kind="kde");
     <br>
-    <hr>
     <br><br>
 
 
@@ -399,6 +570,38 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
     <br><br>
 
     <div class="boxy"><img src="us_stackedbar.png" height=500></div>
+    <br><br>
+    <b>R code:</b><br>
+    # Create a new data frame that shows number by location type and race <br>
+    shootings_per_loc_type_race <- aggregate(cleansed_data$for_count,  <br>
+    by=list(cleansed_data$location.1, cleansed_data$race),FUN = sum) <br> <br>
+
+    # Change the column heading names to Location_Type, Race and Num_Shootings <br>
+    colnames(shootings_per_loc_type_race) <- c("Location_Type", "Race", "Num_Shootings") <br><br>
+
+    # Create a bar chart using ggplot2 to show shootings by location type and race <br>
+    plot_loc_type_race <- ggplot() +  <br>
+      geom_bar(aes(y=Num_Shootings, x=Location_Type, fill=Race), data = shootings_per_loc_type_race,  <br>
+      stat = "identity", position = "fill") + <br>
+      scale_fill_manual(values = c(colour_palette[20], colour_palette[45], colour_palette[60],  <br>
+      colour_palette[75], colour_palette[85], colour_palette[95])) + <br>
+      labs(x = "Location Type", <br>
+           y = "% of mass shootings", <br>
+           fill = "Race") + <br>
+      theme( <br>
+        legend.position = "top", <br>
+        legend.title = element_text(colour = "#666666", size = 16), <br>
+        legend.text = element_text(colour = "#666666", size = 16), <br>
+        axis.text.y = element_blank(), <br>
+        axis.text.x = element_text(colour = "#666666", size = 16), <br>
+        axis.title = element_text(colour = "#666666", size = 16), <br>
+        axis.ticks = element_blank(), <br>
+        panel.background = element_blank(), <br>
+        axis.line.x = element_line(colour = "#666666"), <br>
+        plot.margin=unit(c(1,0,1,0),"cm"))               <br> <br>
+
+    # Display the bar chart  <br>
+    plot_loc_type_race <br>
     <br>
     <hr>
     <br><br>
@@ -440,6 +643,41 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
     <br><br>
 
     <div class="boxy"><img src="us_bubble.png" height=500></div>
+    <br><br>
+    <b>R code:</b><br>
+    # Create a new data frame that shows number by decade and whether semi-automatic weapons were used <br>
+    shootings_per_decade_semi <- aggregate(cleansed_data$for_count, by=list(cleansed_data$decade,  <br>
+    cleansed_data$semi_auto_used),FUN = sum) <br> <br>
+
+    # Change the column heading names to Decade, Semi_Auto_Weapons_Used, and Num_Shootings <br>
+    colnames(shootings_per_decade_semi) <- c("Decade", "Semi_Auto_Weapons_Used", "Num_Shootings") <br> <br>
+
+    # Create a bubble chart
+    bubble_decade_semi <- ggplot(shootings_per_decade_semi, aes(x=Decade, y=Num_Shootings,  <br>
+    color = Semi_Auto_Weapons_Used)) + <br>
+      geom_point(alpha=0.7, size = 10)+ <br>
+      scale_colour_manual(values = c(colour_palette[70], colour_palette[90]))+ <br>
+      labs(x = "Decade", <br>
+           y = "Number of mass shootings", <br>
+           colour = "Semi-Auto Weapons Used?") + <br>
+      theme( <br>
+        legend.position = "top", <br>
+        legend.title = element_text(colour = "#666666", size = 16), <br>
+        legend.text = element_text(colour = "#666666", size = 16), <br>
+        legend.key = element_rect(fill = NA, colour = NA), <br>
+        axis.text.y = element_text(colour = "#666666", size = 16), <br>
+        axis.text.x = element_text(colour = "#666666", size = 16), <br>
+        axis.title = element_text(colour = "#666666", size = 16), <br>
+        axis.ticks = element_blank(), <br>
+        panel.background = element_blank(), <br>
+        panel.grid.major = element_line(colour = "#e0e0e0"), # Add the major grid lines back in <br>
+        panel.grid.minor = element_line(colour = "#e0e0e0"), <br>
+        axis.line.x = element_line(colour = "#666666"), <br>
+        plot.margin=unit(c(1,0,1,0),"cm"))+ <br>
+      coord_cartesian(ylim=c(0,40)) <br> <br>
+
+    # Display the bubble chart <br>
+    bubble_decade_semi <br>
     <br>
     <hr>
     <br><br>
@@ -488,9 +726,7 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
                  data=df_2yrs_2, kind="bar", height=2.5, aspect=.8); <br>
 
     <br>
-    <hr>
     <br><br>
-
     
 
 
@@ -530,7 +766,6 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
     sns.relplot(x="gdpPercap", y="lifeExp", col="continent", s=75, color='#E5825B', alpha=0.6,
             data=df_2007_no_nulls, height=4, col_wrap=3);
     <br>
-    <hr>
     <br><br>
 
     
@@ -590,9 +825,6 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
     with sns.color_palette("Purples_r"):
     sns.pairplot(three_num_vars, height=3, kind="reg");
     <br>
-    <hr>
-    <br><br>
-
     <br>
     <br>
     
