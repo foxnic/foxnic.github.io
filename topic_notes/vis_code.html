@@ -130,6 +130,16 @@
     <h2>One Categorical Variable </h2>
     <br>
 
+    <div class="boxy"><img src="us_tree.png" height=500></div>
+    <br>
+    <hr>
+    <br><br>
+
+    <div class="boxy"><img src="us_bigolnum.png" height=200></div>
+    <br>
+    <hr>
+    <br><br>
+
     <div class="boxy"><img src="freq.png" height=250></div>
     <br><br>
     <b>Python code:</b><br>
@@ -137,16 +147,6 @@
     continent_le.reset_index(inplace=True) <br>
     continent_le.columns = ['Continent', 'Frequency'] <br>
     continent_le <br>
-    <br>
-    <hr>
-    <br><br>
-
-    <div class="boxy"><img src="us_tree.png" height=500></div>
-    <br>
-    <hr>
-    <br><br>
-
-    <div class="boxy"><img src="us_bigolnum.png" height=200></div>
     <br>
     <hr>
     <br><br>
@@ -206,17 +206,6 @@
 
     <h2> One Category and One Number </h2>
     <br>
-
-    <div class="boxy"><img src="freq2.png" height=250></div>
-    <br><br>
-    <b>Python code:</b><br>
-    cont_le_ft = pd.DataFrame(df.groupby(by=['continent'])['lifeExp'].median().round(2)) <br>
-    cont_le_ft.reset_index(inplace=True) <br>
-    cont_le_ft.columns = ['Continent', 'Median_life_exp'] <br>
-    cont_le_ft <br>
-    <br>
-    <hr>
-    <br><br>
 
     <div class="boxy"><img src="us_map.png" height=500></div>
     <br>
@@ -281,6 +270,17 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
     plt.ylabel('Life Expectancy', fontsize=14, color='#3F3F41'); <br>
     plt.tick_params(labelsize=14, color='#3F3F41'); <br>
     sns.despine(); <br>
+    <br>
+    <hr>
+    <br><br>
+
+    <div class="boxy"><img src="freq2.png" height=250></div>
+    <br><br>
+    <b>Python code:</b><br>
+    cont_le_ft = pd.DataFrame(df.groupby(by=['continent'])['lifeExp'].median().round(2)) <br>
+    cont_le_ft.reset_index(inplace=True) <br>
+    cont_le_ft.columns = ['Continent', 'Median_life_exp'] <br>
+    cont_le_ft <br>
     <br>
     <hr>
     <br><br>
@@ -385,6 +385,19 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
     <h2>Two Categories and One Number </h2>
     <br>
 
+    <div class="boxy"><img src="multiscatter.png" height=500></div>
+    <br><br>
+    <b>Python code:</b><br>
+    sns.scatterplot(data=two_cats_ft, x='year', y='median_life_exp', hue='continent', alpha=0.6, s=75); <br>
+    plt.title('Scatter Plot - Life Expectancy 1952-2007', fontsize=18, color='#3F3F41'); <br>
+    plt.xlabel('Year', fontsize=14, color='#3F3F41'); <br>
+    plt.ylabel('Median Life Expectancy', fontsize=14, color='#3F3F41'); <br>
+    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
+    sns.despine() <br>
+    <br>
+    <hr>
+    <br><br>
+
     <div class="boxy"><img src="us_stackedbar.png" height=500></div>
     <br>
     <hr>
@@ -427,19 +440,6 @@ sns.stripplot(x='continent', y='lifeExp', data=df,
     <br><br>
 
     <div class="boxy"><img src="us_bubble.png" height=500></div>
-    <br>
-    <hr>
-    <br><br>
-
-    <div class="boxy"><img src="multiscatter.png" height=500></div>
-    <br><br>
-    <b>Python code:</b><br>
-    sns.scatterplot(data=two_cats_ft, x='year', y='median_life_exp', hue='continent', alpha=0.6, s=75); <br>
-    plt.title('Scatter Plot - Life Expectancy 1952-2007', fontsize=18, color='#3F3F41'); <br>
-    plt.xlabel('Year', fontsize=14, color='#3F3F41'); <br>
-    plt.ylabel('Median Life Expectancy', fontsize=14, color='#3F3F41'); <br>
-    plt.tick_params(labelsize=14, color='#3F3F41'); <br>
-    sns.despine() <br>
     <br>
     <hr>
     <br><br>
