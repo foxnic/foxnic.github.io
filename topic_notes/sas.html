@@ -103,19 +103,19 @@
     RUN; 
     <br><br>
 
-    /* scatter plot where hue (colour) is a 3rd NUMERICAL variable */
+    /* scatter plot where hue (colour) is a 3rd NUMERICAL variable */ <br>
     PROC SGPLOT DATA=my_data; <br>
     <span style="background-color:yellow;"> SCATTER </span> X=myCol1 Y=myCol2 / <span style="background-color:yellow;"> COLORRESPONSE </span>=myCol3 MARKERATTRS=(SYMBOL=CIRCLEFILLED SIZE=14); <br>
     RUN;
     <br><br>
 
-    /* scatter plot where hue (colour) is a 3rd CATEGORICAL variable */
+    /* scatter plot where hue (colour) is a 3rd CATEGORICAL variable */ <br>
     PROC SGPLOT DATA=my_data; <br>
     <span style="background-color:yellow;"> SCATTER </span> X=myCol1 Y=myCol2 / <span style="background-color:yellow;"> GROUP </span>=myCol3; <br>
     RUN;
     <br><br>
 
-    /* bar plot - frequency count */
+    /* bar plot - frequency count */ <br>
     PROC SGPLOT DATA=my_data; <br>
     <span style="background-color:yellow;"> VBAR </span> myCol1 / FREQ=myCol2; <br>
     YAXIS GRID; <br>
