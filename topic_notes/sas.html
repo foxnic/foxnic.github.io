@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/mysite.css">
+  </head>
+  <body>
+    <!-- Menu Bar -->
+    <div class="topnav">
+      <a href="/index.html">Home</a>
+      <a href="/resources.html">Resources</a>
+      <a class="active" href="/topics.html">Topics</a>
+      <a href="/talks.html">Talks</a>
+      <a href="/about.html">About</a>
+    </div>
+    
+  
+
+    <h1>SAS</h1>
+    <center>Snippets of SAS code that I often use. </center>
+
+
+    <h2>Import Data</h2>  
+
+    PROC <span style="background-color:yellow;"> IMPORT </span> DATAFILE=('my_file.csv') DBMS=CSV OUT=my_data; <br>
+    GETNAMES=YES; <br>
+    RUN; <br>
+    
+
+    <h2>Initial Look at Data</h2> 
+
+    PROC <span style="background-color:yellow;"> PRINT </span> DATA=my_data; RUN; 
+    <br><br>
+
+    /* View variable names and types */ <br>
+    ODS SELECT <span style="background-color:yellow;"> VARIABLES </span>; <br>
+    PROC CONTENTS DATA=my_data; <br>
+    RUN; <br>
+    ODS SELECT DEFAULT; 
+    <br><br>
+
+    /* Display a detailed statistical summary of a particular variable, grouped by a category variable */ <br>
+    PROC <span style="background-color:yellow;"> UNIVARIATE </span> DATA=my_data;  <br>
+    CLASS myCol1; <br>
+    VAR myCol2; <br>
+    RUN; 
+    <br><br>
+
+    /* Display a brief statistical summary of a subset of stats, for a particular variable, grouped by a category variable */ <br>
+    PROC <span style="background-color:yellow;"> MEANS </span> DATA=my_data MIN Q1 MEDIAN Q3 MAX MEAN STD VAR RANGE QRANGE SKEWNESS;  <br>
+    CLASS myCol1; <br>
+    VAR myCol2; <br>
+    RUN; <br><br>
+
+    /* Display moments for a particular variable */ <br>
+    ODS SELECT UNIVARIATE.CM.<span style="background-color:yellow;"> MOMENTS </span>; <br>
+    PROC UNIVARIATE DATA=my_data; <br>
+    FREQ myCol1; <br>
+    VAR myCol2; <br>
+    RUN; <br>
+    ODS SELECT OFF; 
+    <br><br>
+
+    /* View correlation between numerical variables */ <br>
+    PROC <span style="background-color:yellow;"> CORR </span> DATA=my_data; <br>
+    VAR myCol1 myCol2 myCol3; <br>
+    RUN; 
+    
+    
+    <h2>Clean and Transform Data</h2>  
+
+    DATA my_subset;  <br>
+    SET my_data; <br>
+    <span style="background-color:yellow;"> WHERE </span> myCol1 = 'This'; <br>
+    RUN; 
+    <br><br>
+
+    /* create a data set excluding a subset of data */
+    DATA my_subset;  <br>
+    SET my_data; <br>
+    <span style="background-color:yellow;"> IF </span> myCol1 <span style="background-color:yellow;"> NE </span> 'This'; <br>
+    RUN; 
+    <br><br>
+
+    PROC <span style="background-color:yellow;"> SORT </span> DATA=my_data; <br>
+    BY mycol1; <br>
+    RUN; 
+
+
+    <h2>Visualise Data</h2> 
+
+    /* Combined histogram and density plot */ <br>
+    PROC SGPLOT DATA=my_data; <br>
+    <span style="background-color:yellow;"> HISTOGRAM </span> myCol1; <br>
+    <span style="background-color:yellow;"> DENSITY </span> myCol1; <br>
+    RUN; 
+    <br><br>
+
+    /* box plot per category */ <br>
+    PROC SGPLOT DATA=my_data; <br>
+    <span style="background-color:yellow;"> VBOX </span> myCol1 / GROUP=myCol2; <br>
+    TITLE 'My title here'; <br>
+    LABEL 'My axis label here'; <br>
+    RUN; 
+    <br><br>
+
+    /* scatter plot where hue (colour) is a 3rd NUMERICAL variable */
+    PROC SGPLOT DATA=my_data; <br>
+    <span style="background-color:yellow;"> SCATTER </span> X=myCol1 Y=myCol2 / <span style="background-color:yellow;"> COLORRESPONSE </span>=myCol3 MARKERATTRS=(SYMBOL=CIRCLEFILLED SIZE=14); <br>
+    RUN;
+    <br><br>
+
+    /* scatter plot where hue (colour) is a 3rd CATEGORICAL variable */
+    PROC SGPLOT DATA=my_data; <br>
+    <span style="background-color:yellow;"> SCATTER </span> X=myCol1 Y=myCol2 / <span style="background-color:yellow;"> GROUP </span>=myCol3; <br>
+    RUN;
+    <br><br>
+
+    /* bar plot - frequency count */
+    PROC SGPLOT DATA=my_data; <br>
+    <span style="background-color:yellow;"> VBAR </span> myCol1 / FREQ=myCol2; <br>
+    YAXIS GRID; <br>
+    RUN;
+    <br><br>
+
+    /* bar plot - Y axis is a particular numerical variable */ <br>
+    PROC SGPLOT DATA=my_data; <br>
+    <span style="background-color:yellow;"> VBAR </span> myCol1 / RESPONSE=myCol2; <br>
+    YAXIS GRID; <br>
+    TITLE 'My title here'; <br>
+    RUN;
+    <br><br>
+
+    /* Stacked bar plot */ <br>
+    PROC SGPLOT DATA=my_data; <br>
+    <span style="background-color:yellow;"> VBAR </span> myCol1 / <span style="background-color:yellow;"> GROUP </span>=myCol2; <br>
+    YAXIS GRID; <br>
+    TITLE 'My title here'; <br>
+    RUN;
+    <br><br>
+
+    /* Horizontal bar plot */ <br>
+    PROC SGPLOT DATA=my_data; <br>
+    <span style="background-color:yellow;"> HBAR </span> myCol1 / FREQ=myCol2; <br>
+    YAXIS GRID; <br>
+    RUN;
+    <br><br>
+
+    /* Dot plot */ <br>
+    ODS SELECT FREQPLOT; <br>
+    PROC FREQ DATA=my_data ORDER=FREQ; <br>
+    TABLES myCol1 / PLOTS=FREQPLOT (TYPE=<span style="background-color:yellow;"> DOTPLOT </span>); <br>
+    WEIGHT=myCol2; <br>
+    RUN; <br>
+    ODS SELECT DEFAULT; <br>
+    <br><br>
+
+    
+    <h2>Publish Analysis</h2> 
+
+    ODS <span style="background-color:yellow;"> RTF </span> FILE = 'H:\Documents\...'; <br>
+    /* some SAS code here */ <br>
+    ODS RTF CLOSE; <br>
+    <br>
+
+    ODS <span style="background-color:yellow;"> PDF </span> FILE = 'H:\Documents\...'; <br>
+    /* some SAS code here */ <br>
+    ODS PDF CLOSE; <br>
+
+
+    <br><br>
+    
+  </body>
+</html>
