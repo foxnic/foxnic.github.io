@@ -33,6 +33,9 @@
     sns.set(); <br>
     sns.set_style("whitegrid"); <br><br>
 
+    # to display all the columns of the dataframe in the notebook <br>
+    pd.pandas.set_option(<span style="background-color:yellow;">'display.max_columns'</span>, None) <br><br>
+
     # Show a chart created using matplotlib directly under the code that produces it <br>
     %<span style="background-color:yellow;">matplotlib</span> inline <br><br>
 
@@ -80,7 +83,56 @@
     df['col'].<span style="background-color:yellow;">describe</span>()
     <br><br>
 
-    df.<span style="background-color:yellow;">info</span>()
+    df.<span style="background-color:yellow;">info</span>()  <br><br>
+
+    # make a list of the variables that contain <span style="background-color:yellow;">missing values</span> <br>
+    vars_with_na = [var for var in df.columns if df[var].isnull().sum()>1] <br><br>
+
+    # print the variable name and the percentage of missing values <br>
+    for var in vars_with_na: <br>
+        print(var, np.round(df[var].isnull().mean(), 3),  ' % missing values') <br><br>
+
+    def analyse_na_value(df, var): <br>
+    df = df.copy()  <br><br>
+    
+    # let's make a variable that indicates 1 if the observation was missing or zero otherwise <br>
+    df[var] = np.where(df[var].isnull(), 1, 0)  <br><br>
+    
+    # let's calculate the median SalePrice (our target feature) where the information is missing or present <br>
+    df.groupby(var)['SalePrice'].median().plot.bar() <br>
+    plt.title(var) <br>
+    plt.show()  <br><br>
+    
+    for var in vars_with_na: <br>
+    analyse_na_value(data, var)  <br><br>
+
+    # get a list of variables that are <span style="background-color:yellow;">numerical</span> <br>
+    num_vars = [var for var in data.columns if data[var].dtypes != 'O'] <br><br>
+
+    print('Number of numerical variables: ', len(num_vars)) <br><br>
+
+    # view the data for the first few rows for the numerical variables <br>
+    data[num_vars].head() <br><br>
+
+    ### <span style="background-color:yellow;">Categorical</span> variables <br>
+    cat_vars = [var for var in data.columns if data[var].dtypes=='O'] <br>
+    print('Number of categorical variables: ', len(cat_vars)) <br><br>
+
+    # how many category values per category feature? <br>
+    for var in cat_vars: <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; print(var, len(data[var].unique()), ' categories') <br><br>
+
+    # Find category values that make up less than 1% of the observations i.e. <span style="background-color:yellow;">Rare Labels</span> <br>
+    # Labels that are under-represented in the dataset tend to cause over-fitting of machine learning models. <br>
+    # That is why we want to remove them. <br>
+    def analyse_rare_labels(df, var, rare_perc): <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; df = df.copy() <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; tmp = df.groupby(var)['SalePrice'].count() / len(df) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; return tmp[tmp < rare_perc] <br><br>
+
+    for var in cat_vars: <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; print(analyse_rare_labels(data, var, 0.01)) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; print() <br><br>
     
     <h2>Clean and Transform Data</h2>  
 
@@ -221,7 +273,79 @@
     .merge(df4.<span style="background-color:yellow;">query</span>(' col3 == "value1" '), on='col4' )\ <br>
     .sort_values('col5')\ <br>
     .tail(10)\ <br>
-    [['colX', 'colY', 'colZ']] <br>
+    [['colX', 'colY', 'colZ']] <br><br>
+
+    # function to <span style="background-color:yellow;">replace missing values with 'Missing' in categorical variables</span> <br>
+    def fill_categorical_na(df, var_list): <br>
+    X = df.copy() <br>
+    X[var_list] = df[var_list].fillna('Missing') <br>
+    return X <br><br>
+
+    # replace missing values with new label: "Missing" <br>
+    X_train = fill_categorical_na(X_train, vars_with_na) <br>
+    X_test = fill_categorical_na(X_test, vars_with_na) <br><br>
+
+    # check that we have no missing information in the engineered variables <br>
+    X_train[vars_with_na].isnull().sum() <br><br>
+
+    # check that test set does not contain null values in the engineered variables <br>
+    [vr for var in vars_with_na if X_train[var].isnull().sum()>0] <br><br>
+
+    # For <span style="background-color:yellow;">numerical variables with missing values</span>, add an additional variable capturing the missing information, <br>
+    # and then replace the missing information in the original variable by the mode, or most frequent value: <br>
+    # Make a list of the numerical variables that contain missing values <br>
+    vars_with_na = [var for var in data.columns if X_train[var].isnull().sum()>1 and X_train[var].dtypes!='O'] <br><br>
+
+    # print the variable name and the percentage of missing values <br>
+    for var in vars_with_na: <br>
+    print(var, np.round(X_train[var].isnull().mean(), 3),  ' % missing values') <br><br>
+
+    # replace the missing values <br>
+    for var in vars_with_na: <br>
+    
+    &nbsp;&nbsp;&nbsp;# calculate the mode <br>
+    &nbsp;&nbsp;&nbsp;mode_val = X_train[var].mode()[0] <br><br>
+    
+    &nbsp;&nbsp;&nbsp;# train <br>
+    &nbsp;&nbsp;&nbsp;X_train[var+'_na'] = np.where(X_train[var].isnull(), 1, 0) <br>
+    &nbsp;&nbsp;&nbsp;X_train[var].fillna(mode_val, inplace=True) <br><br>
+    
+    &nbsp;&nbsp;&nbsp;# test <br>
+    &nbsp;&nbsp;&nbsp;X_test[var+'_na'] = np.where(X_test[var].isnull(), 1, 0) <br>
+    &nbsp;&nbsp;&nbsp;X_test[var].fillna(mode_val, inplace=True) <br><br>
+
+    # check that we have no more missing values in the engineered variables <br>
+    X_train[vars_with_na].isnull().sum() <br><br>
+
+    # <span style="background-color:yellow;">log transform the numerical variables that do not contain zeros in order to get a more Gaussian-like distribution.</span> <br>
+    # This tends to help Linear machine learning models. <br>
+    for var in ['LotFrontage', 'LotArea', '1stFlrSF', 'GrLivArea', 'SalePrice']: <br>
+    X_train[var] = np.log(X_train[var]) <br>
+    X_test[var]= np.log(X_test[var]) <br><br>
+
+    # check that test set does not contain null values in the engineered variables <br>
+    [var for var in ['LotFrontage', 'LotArea', '1stFlrSF', 'GrLivArea', 'SalePrice'] if X_test[var].isnull().sum()>0] <br><br>
+
+    # same for train set <br>
+    [var for var in ['LotFrontage', 'LotArea', '1stFlrSF', 'GrLivArea', 'SalePrice'] if X_train[var].isnull().sum()>0] <br><br>
+
+    # <span style="background-color:yellow;">deal with categories in variables that are present in less than 1% of the observations:</span> <br>
+    # capture the categorical variables first <br>
+    cat_vars = [var for var in X_train.columns if X_train[var].dtype == 'O'] <br><br>
+
+
+    def find_frequent_labels(df, var, rare_perc): <br>
+    # finds the labels that are shared by more than a certain % of the houses in the dataset <br>
+    df = df.copy() <br>
+    tmp = df.groupby(var)['SalePrice'].count() / len(df) <br>
+    return tmp[tmp>rare_perc].index <br><br>
+
+    # if the label is frequent then leave it alone, otherwise assign it to a new label called 'Rare' <br>
+    # this also will deal with any new data values that come along in production that are rare <br>
+    for var in cat_vars: <br>
+    frequent_ls = find_frequent_labels(X_train, var, 0.01) <br>
+    X_train[var] = np.where(X_train[var].isin(frequent_ls), X_train[var], 'Rare') <br>
+    X_test[var] = np.where(X_test[var].isin(frequent_ls), X_test[var], 'Rare') <br><br>
 
     
 
