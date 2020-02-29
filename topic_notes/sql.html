@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/mysite.css">
+  </head>
+  <body>
+    <!-- Menu Bar -->
+    <div class="topnav">
+      <a href="/index.html">Home</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/resources.html">Resources</a>
+      <a class="active" href="/topics.html">Topics</a>
+      <a href="/talks.html">Talks</a>
+      <a href="/about.html">About</a>
+    </div>
+    
+    <h1>SQL</h1>
+    <center>Some notes and useful resources on Structured Query Language (SQL). </center>
+
+    <br><br>
+    
+    SQL is a language for interacting with data in a relational database.
+    <br><br>
+    
+    It's common practice to make SQL keywords uppercase but the query will also run successfully if keywords are in lower case. It's not case sensitive.
+    <br><br>
+    
+    It's also common practice (but not essential) to include a semicolon at the end of a query to tell SQL where the end of the query is.
+    <br><br>
+
+    in <b>PostgreSQL, single quotes</b> must be used with the WHERE clause.
+    <br><br>
+    
+    /* To print 'I love SQL!': */
+    <br>
+    SELECT 'I love SQL' <br>
+    AS result; 
+    <br><br>
+
+    /* view the 'title' column in the 'movies' table */ <br>
+    SELECT title <br>
+    FROM movies;
+    <br><br>
+
+    /* show the number of rows in the countries table */
+    SELECT COUNT(*) <br>
+    FROM countries;
+    <br><br>
+
+    /* show the number of unique values of country in the countries table */
+    SELECT DISTINCT country_name <br>
+    FROM countries;
+    <br><br>
+
+    SELECT COUNT(surname) <br>
+    FROM employees;
+    <br><br>
+
+    SELECT COUNT(DISTINCT surname) <br>
+    FROM employees;
+    <br><br>
+
+    SELECT title <br>
+    FROM movies <br>
+    WHERE title = 'Superman';
+    <br><br>
+
+    SELECT title <br>
+    FROM movies <br>
+    WHERE release_year > 2015;
+    <br><br>
+
+    SELECT title <br>
+    FROM movies <br>
+    WHERE country = 'India';
+    <br><br>
+
+    SELECT (COUNT *) <br>
+    FROM movies <br>
+    WHERE language = 'English';
+    <br><br>
+
+    SELECT title <br>
+    FROM movies <br>
+    WHERE release_year > 1980 <br>
+    AND release_year < 2015;
+    <br><br>
+
+    (Note: 'AND' must be on a new line, otherwise the code is not valid.)
+    <br><br>
+
+    SELECT * <br>
+    FROM movies <br>
+    WHERE language='Spanish' <br>
+    AND release_year > 2000 <br>
+    AND release_year < 2010;
+    <br><br>
+
+    SELECT title <br>
+    FROM movies <br>
+    WHERE (release_year = 1980 OR release_year = 1990) <br>
+    AND (certification = 'PG' OR certification = 'R');
+    <br><br>
+
+    SELECT title, release_year <br>
+    FROM movies <br>
+    WHERE release_year >= 1995 <br>
+    AND release_year < 1998 <br>
+    AND (language='German' OR language='English') <br>
+    AND gross > 2000000;
+    <br><br>
+
+    SELECT title <br>
+    FROM movies <br>
+    WHERE release_year <br>
+    BETWEEN 1997 AND 2000;
+    <br><br>
+
+    (Note: BETWEEN is inclusive, so the beginning and end values are included in the results)
+    <br><br>
+
+    SELECT title, release_year <br>
+    FROM movies <br>
+    WHERE release_year BETWEEN 1995 AND 1999 <br>
+    AND budget > 2000000 <br>
+    AND (language='German' OR language='French');
+    <br><br>
+
+    SELECT title, release_year <br>
+    FROM movies <br>
+    WHERE release_year IN (1980, 2010) <br>
+    AND duration > 90;
+    <br><br>
+
+    SELECT COUNT(*) <br>
+    FROM employees <br>
+    WHERE birthdate IS NULL;
+    <br><br>
+
+    SELECT COUNT(*) <br>
+    FROM employees <br>
+    WHERE birthdate IS NOT NULL;
+    <br><br>
+
+    SELECT name <br>
+    FROM clubs <br>
+    WHERE name LIKE 'Cycling%';
+    <br><br>
+
+    SELECT name <br>
+    FROM clubs <br>
+    WHERE name NOT LIKE 'Cycling%';
+    <br><br>
+
+    SELECT name <br>
+    FROM clubs <br>
+    WHERE name LIKE 'Cycl_';
+    <br><br>
+
+    SELECT name <br>
+    FROM clubs <br>
+    WHERE name LIKE '_ing%';
+    <br><br>
+
+    SELECT AVG(budget) <br>
+    FROM movies;
+    <br><br>
+
+    SELECT MAX(budget) <br>
+    FROM movies;
+    <br><br>
+
+    SELECT SUM(budget) <br>
+    FROM movies;
+    <br><br>
+
+    SELECT MAX(gross) <br>
+    FROM movies <br>
+    WHERE release_year BETWEEN 2000 AND 2012;
+    <br><br>
+
+    SELECT (10 / 3);
+    <br><br>
+
+    SELECT AVG(duration)/60.0 AS avg_duration_hours <br>
+    FROM movies;
+    <br><br>
+
+    Note: SQL assumes that if you divide an integer by an integer, you want to get an integer back. This means that the following will erroneously result in 400.0: <br><br>
+
+    SELECT 45 / 10 * 100.0;<br><br>
+
+    This is because 45 / 10 evaluates to an integer (4), and not a decimal number like we would expect. So when you're dividing make sure at least one of your numbers has a decimal place: <br><br>
+
+    SELECT 45 * 100.0 / 10; <br><br>
+
+    The above now gives the correct answer of 450.0 since the numerator (45 * 100.0) of the division is now a decimal <br><br>
+
+    -- get number of decades between oldest movie and most recent movie <br>
+    SELECT (MAX(release_year)-MIN(release_year))/10.0 AS number_of_decades <br>
+    FROM movies;
+    <br><br>
+
+    SELECT title <br>
+    FROM movies <br>
+    ORDER BY release_year DESC;
+    <br><br>
+
+    SELECT title <br>
+    FROM movies <br>
+    WHERE release_year IN (1990, 2000) <br>
+    ORDER BY release_year;
+    <br><br>
+
+    SELECT * <br>
+    FROM movies <br>
+    WHERE release_year != 1995 <br>
+    ORDER BY duration, title;
+    <br><br>
+
+    SELECT sex, count(*) <br>
+    FROM members <br>
+    GROUP BY sex;
+    <br><br>
+
+    SELECT release_year, MAX(budget) <br>
+    FROM movies <br>
+    GROUP BY release_year <br>
+    ORDER BY release_year;
+    <br><br>
+
+    Note: ORDER BY comes after GROUP BY
+    <br><br>
+
+    SELECT release_year <br>
+    FROM movies <br>
+    GROUP BY release_year <br>
+    HAVING COUNT(title) > 5;
+    <br><br>
+
+    SELECT release_year, AVG(budget) AS avg_budget, AVG(gross) AS avg_gross <br>
+    FROM movies <br>
+    WHERE release_year > 1980 <br>
+    GROUP BY release_year <br>
+    HAVING AVG(budget) > 50000000 <br>
+    ORDER BY AVG(gross) DESC;
+    <br><br>
+
+    -- select country, average budget, average gross <br>
+    SELECT country, AVG(budget) AS avg_budget, AVG(gross) AS avg_gross <br>
+    -- from the movies table <br>
+    FROM movies <br>
+    -- group by country  <br>
+    GROUP BY country <br>
+    -- where the country has more than 10 titles <br>
+    HAVING COUNT(title) > 10 <br>
+    -- order by country <br>
+    ORDER BY country <br>
+    -- limit to only show 10 results <br>
+    LIMIT 10;
+    <br><br>
+
+    <h2>Joins</h2>
+
+    
+    SELECT cities.name AS city, countries.name AS country, countries.region  <br>
+    FROM cities  <br>
+    INNER JOIN countries  <br>
+    ON cities.country_code = countries.code;
+    <br><br>
+
+
+    SELECT c.code AS country_code, c.name, e.year, e.inflation_rate  <br>
+    FROM countries AS c  <br>
+    INNER JOIN economies AS e  <br>
+    ON c.code = e.code;
+    <br><br>
+
+
+    SELECT c.code, name, region, e.year, fertility_rate, unemployment_rate <br>
+    FROM countries AS c <br>
+    INNER JOIN populations AS p <br>
+    ON c.code = p.country_code <br>
+    INNER JOIN economies AS e <br>
+    ON c.code = e.code AND p.Year = e.Year;
+    <br><br>
+
+    If the attribute to join on is the same in both tables, then USING can be used instead: <br><br>
+
+
+    SELECT c.name AS country, c.continent, l.name AS language, l.official <br>
+    FROM countries AS c <br>
+    INNER JOIN languages AS l <br>
+    USING (code)
+    <br><br>
+
+    SELECT p1.country_code, <br>
+       p1.size AS size2010,  <br>
+       p2.size AS size2015, <br>
+       ((p2.size - p1.size)/p1.size * 100.0) AS growth_perc <br>
+    FROM populations AS p1 <br>
+    INNER JOIN populations AS p2 <br>
+        ON p1.country_code = p2.country_code <br>
+        AND p1.year = p2.year - 5;
+    <br><br>
+
+    SELECT name, continent, code, surface_area, <br>
+    CASE WHEN surface_area > 2000000 THEN 'large' <br>
+         WHEN (surface_area BETWEEN 350000 AND 2000000) THEN 'medium' <br>
+         ELSE 'small' END <br>
+         AS geosize_group <br>
+    FROM countries;
+    <br><br>
+
+    SELECT name, continent, code, surface_area, <br>
+    CASE WHEN surface_area > 2000000 <br>
+            THEN 'large' <br>
+       WHEN surface_area > 350000 <br>
+            THEN 'medium' <br>
+       ELSE 'small' END <br>
+       AS geosize_group <br> 
+    INTO countries_plus <br>
+    FROM countries;
+    <br><br>
+
+    SELECT c1.name AS city, code, c2.name AS country, region, city_proper_pop <br>
+    FROM cities AS c1 <br>
+      LEFT JOIN countries AS c2 <br>
+        ON c1.country_code = c2.code <br>
+    ORDER BY code DESC;
+    <br><br>
+
+    SELECT name AS country, code, region, basic_unit <br>
+    FROM countries <br>
+      FULL JOIN currencies <br>
+        USING (code) <br>
+    WHERE region = 'North America' OR region IS NULL <br>
+    ORDER BY region;
+    <br><br>
+
+
+    SELECT c.name AS city, l.name AS language <br>
+    FROM cities AS c         <br>
+      CROSS JOIN languages AS l <br>
+    WHERE c.name LIKE 'Hyder%';
+    <br><br>
+
+
+
+    <h2>Set Theory Clauses</h2>
+
+    <img src="set_union_intercept_etc.png" width=350 height=125>
+    <br>
+    "Union All" double counts the items that overlap (hence the shading in black).
+    <br><br>
+
+    <h3>Union</h3>
+
+    <img src="set_union.png" width=200 height=350>
+    <br><br>
+
+
+    SELECT * <br>
+      FROM economies2010 <br>
+        UNION <br>
+    SELECT * <br>
+      FROM economies2015 <br>
+    ORDER BY code, year;
+    <br><br>
+
+    -- View all unique country_codes across the cities and currency tables <br>
+    SELECT country_code <br>
+      FROM cities <br>
+      UNION <br>
+    SELECT code <br>
+      FROM currencies <br>
+    ORDER BY country_code;
+    <br><br>
+
+    <h3>Union All</h3>
+
+    <img src="set_union_all.png" width=175 height=375>
+    <br><br>
+
+    -- View country code and year (including duplicates) across economies & populations tables <br>
+    SELECT code, year <br>
+      FROM economies <br>
+      UNION ALL <br>
+    SELECT country_code, year <br>
+      FROM populations <br>
+    ORDER BY code, year;
+    <br><br>
+
+    <h3>Intersect</h3>
+
+    <img src="set_intersect.png" width=150 height=300>
+    <br><br>
+
+    SELECT code, year <br>
+      FROM economies <br>
+    INTERSECT <br>
+    SELECT country_code, year <br>
+      FROM populations <br>
+    ORDER BY code, year;
+    <br><br>
+
+    -- View countries that have a city with the same name as the country <br>
+    SELECT name <br>
+      FROM countries <br>
+      INTERSECT <br>
+    SELECT name <br>
+      FROM cities;
+      <br><br>
+
+    <h3>Except</h3>
+
+    <img src="set_except.png" width=150 height=300>
+    <br><br>
+
+
+    -- Show cities that are NOT capital cities <br>
+    SELECT name <br>
+      FROM cities <br>
+      EXCEPT <br>
+    SELECT capital <br>
+      FROM countries <br>
+    ORDER BY name;
+    <br><br>
+
+
+    <h2>Sub-Queries</h2>
+
+    <img src="semijoin.png" width=150 height=250>
+    <br><br>
+
+    -- view unique list of languages from countries in the Middle East <br>
+    SELECT DISTINCT name <br>
+      FROM languages <br>
+    WHERE code IN <br>
+      (SELECT code <br>
+       FROM countries <br>
+       WHERE region = 'Middle East') <br>
+    ORDER BY name;
+    <br><br>
+
+    This can also be achieved with an inner join: <br><br>
+
+    SELECT DISTINCT languages.name AS language <br>
+    FROM languages <br>
+    INNER JOIN countries <br>
+    ON languages.code = countries.code <br>
+    WHERE region = 'Middle East' <br>
+    ORDER BY language;
+    <br><br>
+
+    A more complicated example, also using set tbeory clauses: <br><br>
+
+      SELECT name <br>
+      FROM cities AS c1 <br>
+      WHERE country_code IN <br>
+    ( <br>
+        SELECT e.code <br>
+        FROM economies AS e <br> 
+        UNION <br>
+        SELECT c2.code <br>
+        FROM currencies AS c2 <br>
+        EXCEPT <br>
+        SELECT p.country_code <br>
+        FROM populations AS p <br>
+    );
+    <br><br>
+
+    <img src="antijoin.png" width=150 height=250>
+    <br><br>
+
+    SELECT code, name <br>
+    FROM countries <br>
+    WHERE continent = 'Oceania' <br>
+    AND code NOT IN <br>
+        (SELECT code <br>
+         FROM currencies);
+    <br><br>
+
+   <h3> More Sub-Queries In WHERE </h3>
+
+
+    SELECT * <br>
+    FROM populations <br>
+    WHERE life_expectancy > <br>
+      1.15*(SELECT AVG(life_expectancy) FROM populations WHERE year = 2015) <br>
+    AND year = 2015;
+    <br><br>
+
+
+    SELECT name, country_code, urbanarea_pop <br>
+    FROM cities <br>
+    WHERE name IN <br>
+      (SELECT capital <br>
+       FROM countries) <br>
+    ORDER BY urbanarea_pop DESC;
+    <br><br>
+
+    SELECT code, inflation_rate, unemployment_rate <br>
+    FROM economies <br>
+    WHERE year = 2015 AND code NOT IN <br>
+        (SELECT code <br>
+         FROM countries <br>
+         WHERE (gov_form = 'Constitutional Monarchy' OR gov_form LIKE '%Republic%')) <br>
+    ORDER BY inflation_rate;
+    <br><br>
+
+    <h3> Sub-Queries In SELECT </h3>
+
+    The following 2 queries do the same thing... <br><br>
+
+    SELECT countries.name AS country, <br>
+      (SELECT count(*) <br>
+       FROM cities <br>
+       WHERE countries.code = cities.country_code) AS cities_num <br>
+    FROM countries <br>
+    ORDER BY cities_num DESC, country ASC <br>
+    LIMIT 9;
+    <br><br>
+
+    SELECT countries.name AS country, COUNT(*) AS cities_num <br>
+    FROM cities <br> 
+        INNER JOIN countries <br>
+        ON countries.code = cities.country_code <br>
+    GROUP BY country <br>
+    ORDER BY cities_num DESC, country <br>
+    LIMIT 9;
+    <br><br>
+
+    <h3> Sub-Queries In FROM </h3>
+
+    
+    SELECT local_name, lang_num <br>
+    FROM countries, <br>
+        (SELECT code, COUNT(*) AS lang_num <br>
+         FROM languages <br>
+         GROUP BY code) AS subquery <br>
+      WHERE subquery.code = countries.code <br>
+    ORDER BY lang_num DESC;
+    <br><br>
+
+    More examples... <br><br>
+
+
+    SELECT name, continent, inflation_rate <br>
+    FROM countries <br>
+      INNER JOIN economies <br>
+      ON countries.code = economies.code <br>
+    WHERE year = 2015 <br>
+    AND inflation_rate IN ( <br>
+            SELECT MAX(inflation_rate) AS max_inf <br>
+            FROM ( <br>
+                 SELECT name, continent, inflation_rate <br>
+                 FROM countries <br>
+                 INNER JOIN economies <br>
+                 ON countries.code = economies.code <br>
+                 WHERE year = 2015) AS subquery <br>
+            GROUP BY continent);
+    <br><br>
+
+
+    <h3>CASE Statements</h3>
+
+
+    SELECT  <br>
+      CASE WHEN hometeam_id = 10189 THEN 'FC Schalke 04' <br>
+            WHEN hometeam_id = 9823 THEN 'FC Bayern Munich' <br>
+             ELSE 'Other' END AS home_team, <br>
+      COUNT(id) AS total_matches <br>
+    FROM matches_germany <br>
+    GROUP BY home_team; 
+    <br><br>
+
+    SELECT  <br>
+      m.date, <br>
+      t.team_long_name AS opponent, <br>
+      CASE WHEN m.home_goal > m.away_goal THEN 'Barcelona win!' <br>
+            WHEN m.home_goal < m.away_goal THEN 'Barcelona loss :('  <br>
+            ELSE 'Tie' END AS outcome  <br>
+    FROM matches_spain AS m <br>
+    LEFT JOIN teams_spain AS t  <br>
+    ON m.awayteam_id = t.team_api_id <br>
+    WHERE m.hometeam_id = 8634; 
+    <br><br>
+
+
+  </body>
+</html>

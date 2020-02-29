@@ -22,7 +22,13 @@
     <span style="background-color:yellow;"> pwd </span> - print working directory 
     <br><br>
 
+    <span style="background-color:yellow;"> head hello.py </span> - shows first 10 lines of the hello.py file
+    <br><br>
+
     <span style="background-color:yellow;"> ls </span> - list contents of current directory
+    <br><br>
+
+    <span style="background-color:yellow;"> ls ~ </span> - list contents of home directory 
     <br><br>
 
     <span style="background-color:yellow;"> ls Desktop </span> - list contents of Desktop directory (a folder in the current directory)
@@ -34,8 +40,138 @@
     <span style="background-color:yellow;"> ls / </span> - list contents of root directory
     <br><br>
 
+    <span style="background-color:yellow;"> ls -1 </span> - list contents of current directory, one file/folder per line. Note this is a 1 not an l
+    <br><br>
+
+    <span style="background-color:yellow;"> ls -lh </span> - list contents of current directory, including details, and show numbers in human readable format (e.g. 40K). Note this is an l not a 1.
+    <br><br>
+
+    <span style="background-color:yellow;"> ls t*  </span> - list contents of current directory where the filename starts with t (case sensitive)
+    <br><br>
+
+    <span style="background-color:yellow;"> ls | grep ^t </span> - list contents of current directory where the filename starts with t (case sensitive)
+    <br><br>
+
+    <span style="background-color:yellow;"> ls | grep -i ^t </span> - list contents of current directory where the filename starts with t (ignores case)
+    <br><br>
+
+    <span style="background-color:yellow;"> ls | grep -i ^[a-g] </span> - list contents of current directory where the filename starts with any letter between a and g inclusive (ignores case)
+    <br><br>
+
+    <span style="background-color:yellow;"> ls | grep -i ^t.*do.* </span> - list contents of current directory where the filename starts with t and contains the word 'do' (ignores case). Note .* means any number of any type of character. ^ means start of string.
+    <br><br>
+
+    <span style="background-color:yellow;"> ls | grep -i \.py$ </span> - list contents of current directory where the filename ends with .py and ignore case (note that the back slash before the . means the . is treated literally rather than as a special command. $ means end of string)
+    <br><br>
+
+    <span style="background-color:yellow;"> ls | grep -i ^m.*_.*\.txt$ </span> - list contents of current directory where the filename starts with m, contains an underscore, and ends with .txt (ignoring case)
+    <br><br>
+
+    <span style="background-color:yellow;"> history </span> - list previous commands
+    <br><br>
+
+    <span style="background-color:yellow;"> !125 </span> - re-run command at line 125 in the history 
+    <br><br>
+
     <span style="background-color:yellow;"> clear </span> - clear the shell window by scrolling down
     <br><br>
+
+    <span style="background-color:yellow;"> CTRL-D </span> - exit
+    <br><br>
+
+    <span style="background-color:yellow;"> touch </span> - creates an empty file, or if used with an existing file, sets the latest accessed time to the current time
+    <br><br>
+
+    <span style="background-color:yellow;"> cp </span> - copy
+    <br><br>
+
+    <span style="background-color:yellow;"> mv </span> - rename
+    <br><br>
+
+    <span style="background-color:yellow;"> rm </span> - delete file
+    <br><br>
+
+    <span style="background-color:yellow;"> rmdir </span> - remove EMPTY folder
+    <br><br>
+
+    <span style="background-color:yellow;"> rm -r </span> - remove folder and all sub-contents
+    <br><br>
+
+    <span style="background-color:yellow;"> chmod u+x hello.py </span> - allow hello.py to be executed
+    <br><br>
+
+    <span style="background-color:yellow;"> ps -ef </span> - list all processes running on the system
+    <br><br>
+
+    <span style="background-color:yellow;"> ps -ef | less </span> - list all processes running on the system but only show what fits on the screen, then let me scroll through the rest
+    <br><br>
+
+    <span style="background-color:yellow;"> ps -ef | head </span> - list all processes running on the system but only show the first 10 lines of the output
+    <br><br>
+
+    <span style="background-color:yellow;"> ps -ef | tail </span> - list all processes running on the system but only show the last 10 lines of the output
+    <br><br>
+
+    <span style="background-color:yellow;"> ls | head </span> - list contents of current folder but only show the first 10 lines of the output
+    <br><br>
+
+    <span style="background-color:yellow;"> ps -ef | grep root </span> - list all processes running on the system but only show those that have root in the filename
+    <br><br>
+
+    <span style="background-color:yellow;"> ps -ef | grep root | head </span> - list all processes running on the system but only show those that have root in the filename, and only show the first 10 lines of the output
+    <br><br>
+
+    <span style="background-color:yellow;"> ps -ef | grep root > root_processes.dat </span> - list all processes running on the system but only show those that have root in the filename, and save them to a file called root_process.dat rather than outputting the results to the screen.
+    <br><br>
+
+    <span style="background-color:yellow;"> ls | head <b> >> </b> contents.dat </span> - <b>append</b> the top 10 rows of the list of contents of current folder to the file contents.dat
+    <br><br>
+
+    <span style="background-color:yellow;"> ls | head | <b>sort</b> </span> - <b>sort</b> the top 10 rows of the list of contents of current folder 
+    <br><br>
+
+    <span style="background-color:yellow;"> ls | head | sort <b> -r </b> </span> - <b>reverse</b> sort the top 10 rows of the list of contents of current folder 
+    <br><br>
+
+    <span style="background-color:yellow;"> ls -l | grep '^d'</span> - list the sub-folders (sub-directories) in the current folder (directory). I.e. list the files where the first column value of the details for the files starts with a 'd'
+    <br><br>
+
+    <span style="background-color:yellow;"> ls -l | grep <b> -v </b> '^d'</span> - list all <b>except</b> the sub-folders (sub-directories) in the current folder (directory)
+    <br><br>
+
+    <span style="background-color:yellow;"> ls -lh<b>S</b> | head </span> - list contents of current directory, including details, and show numbers in human readable format (e.g. 40K), and <b>sort them so the largest are at the top</b>, and only show the first 10 lines of the output
+    <br><br>
+
+    <span style="background-color:yellow;"> ls -lhS | head <b>-n15</b> </span> - list contents of current directory, including details, and show numbers in human readable format (e.g. 40K), and <b>sort them so the largest are at the top</b>, and only show the first <b>15</b> lines of the output
+    <br><br>
+
+    <h3>Job Control</h3>
+
+    <span style="background-color:yellow;"> gedit -s </span> - run the job gedit in standalone mode
+    <br><br>
+
+    <span style="background-color:yellow;"> CTRL-Z </span> - suspend job
+    <br><br>
+
+    <span style="background-color:yellow;"> CTRL-C </span> - kill job
+    <br><br>
+
+    <span style="background-color:yellow;"> bg </span> - run job in the background
+    <br><br>
+
+    <span style="background-color:yellow;"> fg </span> - run job in the foreground (then you could use CTRL-C to kill the job)
+    <br><br>
+
+    <span style="background-color:yellow;"> jobs </span> - list all current jobs
+    <br><br>
+
+    <span style="background-color:yellow;"> gedit & </span> - runs gedit job in the bacground
+    <br><br>
+
+    <span style="background-color:yellow;"> ls > /dev/null</span> - sends output of ls to the null device so you don't have to see it
+    <br><br>
+
+
     
   </body>
 </html>
