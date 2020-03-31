@@ -46,8 +46,8 @@ h2 {
 
 h3 {
   color: #302f2f;
-  font-size: 24px;
-  font-weight: normal;
+  font-size: 18px;
+  font-weight: bold;
   text-align: left;
   margin-top: 50px; /* Add some white space above h2 headings */
 }
