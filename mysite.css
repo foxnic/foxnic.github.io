@@ -15,6 +15,11 @@ a
   letter-spacing: 0.05em;
 }
 
+a:hover  /* Change link to orange when you hover over it */
+{
+  color: #e6551c;
+}
+
 body
 {
   color: #302f2f;
