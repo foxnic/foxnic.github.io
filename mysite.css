@@ -64,7 +64,6 @@ h2 {
   /* Line-height based on font-size,
   with addition viewport-relative growth */
   line-height: 1.5;
-  margin: 0.5em;
 }
 
 h3 {
