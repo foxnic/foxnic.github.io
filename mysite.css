@@ -65,7 +65,7 @@ h2 {
 h3 {
   color: #383838;
 
-  font-size: calc(1em + 0.5vw); /* Minimum 16x, ¶ grows more slowly (half rate of screen growth) */
+  font-size: calc(1em + 0.3vw); /* Minimum 16x, ¶ grows more slowly (third rate of screen growth) */
 
   /* font-size: 18px; */
   
