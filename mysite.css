@@ -60,6 +60,11 @@ h2 {
   font-weight: normal;
   text-align: left;
   margin-top: 50px; /* Add some white space above h2 headings */
+
+  /* Line-height based on font-size,
+  with addition viewport-relative growth */
+  line-height: calc(1.2em + 0.5vw);
+  margin: 0.5em;
 }
 
 h3 {
