@@ -13,7 +13,7 @@ a
   font-size: calc(1em + 0.3vw); /* Minimum 16x, ¶ grows more slowly (third rate of screen growth) */
   /*font-size: 16px; */
   text-align: left;
-  line-height: 1.5em;
+  line-height: 1.5;
   letter-spacing: 0.05em;
 }
 
@@ -33,7 +33,7 @@ body
 
   /* Line-height based on font-size,
   with addition viewport-relative growth */
-  line-height: calc(1.5em + 0.5vw);
+  line-height: 1.5;
   margin: 0.5em;
 
   /*line-height: 1.5em; */
@@ -63,7 +63,7 @@ h2 {
 
   /* Line-height based on font-size,
   with addition viewport-relative growth */
-  line-height: calc(1.5em + 0.5vw);
+  line-height: 1.5;
   margin: 0.5em;
 }
 
