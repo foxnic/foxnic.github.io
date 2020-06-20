@@ -8,7 +8,7 @@ img
 
 a
 {
-  color: #383838
+  color: #383838;
   font-family: 'Verdana', sans-serif;
   font-size: calc(1em + 0.3vw); /* Minimum 16x, ¶ grows more slowly (third rate of screen growth) */
   /*font-size: 16px; */
