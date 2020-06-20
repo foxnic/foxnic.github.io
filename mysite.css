@@ -3,11 +3,12 @@ img
 {
   margin-top: 5px; /* Add some white space above images */
   margin-bottom: 5px; /* Add some white space below images */
+  margin-right: 25px;
 }
 
 a
 {
-  color: #302f2f;
+  color: #383838
   font-family: 'Verdana', sans-serif;
   font-size: 16px;
   text-align: left;
@@ -17,14 +18,17 @@ a
 
 a:hover  /* Change link to orange when you hover over it */
 {
-  color: #e6551c;
+  color: #db7546;
 }
 
 body
 {
-  color: #302f2f;
+  color: #383838;
   font-family: 'Verdana', sans-serif;
-  font-size: 16px;
+
+  font-size: calc(1em + 0.5vw); /* Minimum 16x, ¶ grows more slowly (half rate of screen growth) */
+
+  /*font-size: 16px; */
   text-align: left;
   line-height: 1.5em;
   letter-spacing: 0.05em;
@@ -34,23 +38,23 @@ body
 }
 
 h1 {
-  color: #302f2f;
+  color: #383838;
   font-size: 46px;
   font-weight: normal;
-  text-align: center;
+  text-align: left;
   margin-top: 50px; /* Add some white space above h1 headings */
 }
 
 h2 {
-  color: #e6551c;
-  font-size: 34px;
+  color: #383838;
+  font-size: 32px;
   font-weight: normal;
   text-align: left;
   margin-top: 50px; /* Add some white space above h2 headings */
 }
 
 h3 {
-  color: #302f2f;
+  color: #383838;
   font-size: 18px;
   font-weight: bold;
   text-align: left;
@@ -66,8 +70,8 @@ h3 {
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
-  color: #e6551c;
-  text-align: center;
+  color: #383838;
+  text-align: left;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 22px;
@@ -81,7 +85,7 @@ h3 {
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #e6551c;
+  background-color: #383838;
   color: white;
 }
 
@@ -91,7 +95,7 @@ h3 {
   color: #302f2f;
   font-family: 'Verdana', sans-serif;
   font-size: 24px;
-  text-align: center;
+  text-align: left;
   line-height: 1.5em;
   letter-spacing: 0.05em;
 }
@@ -112,7 +116,7 @@ h3 {
   text-align: left;
   line-height: 1.5em;
   letter-spacing: 0.05em;
-  text-align: center;
+  text-align: left;
 }
 
 /* Special style for images with a box shadow */
