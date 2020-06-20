@@ -33,7 +33,7 @@ body
 
   /* Line-height based on font-size,
   with addition viewport-relative growth */
-  line-height: calc(1.2em + 0.5vw);
+  line-height: calc(1.5em + 0.5vw);
   margin: 0.5em;
 
   /*line-height: 1.5em; */
@@ -63,7 +63,7 @@ h2 {
 
   /* Line-height based on font-size,
   with addition viewport-relative growth */
-  line-height: calc(1.2em + 0.5vw);
+  line-height: calc(1.5em + 0.5vw);
   margin: 0.5em;
 }
 
