@@ -163,5 +163,14 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-
+.cv_btn {
+  display: inline-block;
+  padding: 10px;
+  border: 2px solid #000;
+  text-decoration: none;
+}
+.cv_btn:hover{
+  background-color: #000;
+  color: #fff;
+}
 
