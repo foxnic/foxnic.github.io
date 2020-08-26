@@ -124,7 +124,7 @@ h3 {
 /* when class=responsive is used in img src tag, these properties restrict sizing */
 .responsive {
   width: 100%;
-  min-width: 275px;
+  min-width: 325px;
   max-width: 350px;
   height: auto;
 }
