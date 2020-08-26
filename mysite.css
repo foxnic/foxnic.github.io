@@ -21,7 +21,7 @@ body
   color: #383838;
   font-family: 'Verdana', sans-serif;
 
-  font-size: calc(1em + 0.3vw); /* Minimum 16x, ¶ grows more slowly (third rate of screen growth) */
+  font-size: calc(1em + 0.25vw); /* Minimum 16x, ¶ grows more slowly (quarter rate of screen growth) */
 
   /*font-size: 16px; */
 
@@ -50,7 +50,7 @@ h1 {
 
 h2 {
   color: #383838;
-  font-size: 32px;
+  font-size: calc(1.2em + 0.25vw); /* was 32px; */
   font-weight: normal;
   text-align: left;
   margin-top: 50px; /* Add some white space above h2 headings */
@@ -63,7 +63,7 @@ h2 {
 h3 {
   color: #383838;
 
-  font-size: calc(1em + 0.3vw); /* Minimum 16x, ¶ grows more slowly (third rate of screen growth) */
+  font-size: calc(1em + 0.25vw); /* Minimum 16x, ¶ grows more slowly (quarter rate of screen growth) */
 
   /* font-size: 18px; */
   
@@ -112,11 +112,21 @@ h3 {
   letter-spacing: 0.05em;
 }
 
+
+
 /* Special style for the home page image at the top */
 .topimg{
   margin-top: 5px; /* Add some white space above images */
   margin-bottom: 5px; /* Add some white space below images */
-  text-align: center;
+  text-align: left;
+}
+
+/* when class=responsive is used in img src tag, these properties restrict sizing */
+.responsive {
+  width: 100%;
+  min-width: 275px;
+  max-width: 350px;
+  height: auto;
 }
 
 /* Special style for the home page links at the top (twitter, github, linkedin) */
