@@ -175,14 +175,39 @@
 
 So, for the first possible table configuration (see below), the probability is:
 
-  <ul>
-    <li>????</li>
-    <li>????</li>
-    <li>????</li>
-    <li>????</li>
-  </ul>
+(  <span style="color:#db8b14;">24 * 24 * 24 * 24</span> ) / [ ( <span style="color:#1273db;">24 * 1 * 1 * 24</span>) * <span style="color:#bf10de;">40320</span> ] <br>
+= <span style="color:#db8b14;">331776</span> / [ <span style="color:#1273db;">576</span> * <span style="color:#bf10de;">40320</span> ] <br>
+= <span style="color:#db8b14;">331776</span> / 23224320 <br>
+= <b>0.01429</b>
+<br><br>
 
-  The rest of this tutorial is coming soon...
+This is the same as we got when we ran the test in R and Python, and (as expected) is less than 0.05 so this is a statistically significant result. We would conclude that there is evidence of a relationship between exclusion and victimisation.
+<br><br>
+  
+It can get a bit fiddly to do these calculations so thank goodness we can do it more easily in R or Python! 
+<br><br>
+  
+Note: We don’t need to but if we wanted to check we were calculating all this correctly, we could either do this in R/Python (which would be the easiest way), or we could repeat these calculations for all the other possible configurations of the table so that we have a probability for each of the 5 possible configurations of the table. In this example, the probabilities would be:
+<br><br>
+  
+-	0.014
+-	0.229
+-	0.514
+-	0.229
+-	0.014
+<br><br>
+  
+Notice that these add up to 1. This is because these are the possible options so if your probabilities don’t add up to 1 then something has gone wrong.
+
+
+<h2>Earlier you mentioned ‘expected count’. What are expected counts?</h2>
+
+The expected counts are the values we would expect to see in the contingency table if there is no relationship between the 2 variables. 
+<br><br>
+In our example, where we have a sample of 4, we would expect to see:
+<br><br>
+
+The rest of this tutorial is coming soon...
 
 </body>
 </html>
