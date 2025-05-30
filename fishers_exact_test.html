@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="mysite.css">
+</head>
+<body>
+
+<!-- Menu Bar -->
+<div class="topnav">
+  <a href="index.html">Home</a>
+  <a href="papers.html">Papers</a>
+<a href="about.html">About</a>
+  <a class="active" href="learning_materials.html">Learning Materials</a>
+  
+</div>
+
+<h1>Fishers Exact Test</h1>
+
+  <h2>Why would you use it?</h2>
+  
+  Fisher’s Exact test is useful when you want to know if there is a relationship between 2 categorical variables.
+  
+  <h2>Couldn’t I just use the Chi-square test?</h2>
+  
+  Yes, you could, but the Chi-square test may be unreliable if your sample is small. Fisher’s Exact test always gives the true probability of a particular configuration of contingency table values and is always accurate. The Chi-square test is an approximation which can be problematic with small samples.
+  
+  <h2>How small is small?</h2>
+  
+  A commonly used guide is if one or more cells in your contingency table contains an expected count of less than 5.
+  
+  <h2>What is meant by ‘expected count’?</h2>
+  
+  Scroll to the bottom of the page.
+  
+  <h2>Give me an example of the type of data and question that it’s suitable for</h2>
+  
+  I have 2 binary variables – whether someone has ever been excluded from school and whether they have been a victim of violence.
+  <br><br>
+  
+  I want to know if there is a relationship between exclusion and being victimised or whether there is no relationship (i.e., the variables are independent – one does not seem to be related to the other)
+  <br><br>
+  
+  I’ve created a contingency table… 
+  <br><br>
+
+  <img src="ct1.png" alt="a two by two contingency table" width="750" height="475">
+  <br><br>
+
+  …which shows that a greater percentage of people with an exclusion are victimised than people with no exclusions (in fact, all of the people with an exclusion have been victimised but none of the people without an exclusion have been victimised), but I know that it’s possible that this could just be specific to this particular sample and really there is no relationship. 
+  <br><br>
+  
+  I’d like to run a statistical test to find out the probability that there is no relationship. If that probability is extremely low – below 0.05% - then I will have some confidence that there really is a relationship between exclusion and victimisation (rather than the difference in proportions being only relevant to this particular sample). 
+  
+  <h2>How can this be done in R or Python?</h2>
+  
+  To do this in R, we first need a contingency table. Let’s re-create our data in a contingency table called ‘ct’:
+  <br><br>
+
+  <img src="rcode1.png" alt="r code snippet for creating a contingency table for specific values" width="750">
+  <br><br>
+
+  <img src="routput1.png" alt="r code snippet output showing the created contingency table" width="750">
+  <br><br>
+
+  Then run the test:
+  <br><br>
+
+  <img src="rcode2.png" alt="r code snippet for running Fisher's Exact Test" width="750">
+  <br><br>
+
+  This gives us the following results:
+  <br><br>
+
+  <img src="routput2.png" alt="r code snippet output from running Fisher's Exact Test" width="750">
+  <br><br>
+
+  Note that <p style="background-color:#F5F5F5;">alternative = “greater”</p> means we’re running a one-sided test and expecting the difference in proportions is greater than expected if there were no relationship. This can be changed to <p style="background-color:#F5F5F5;">“less”</p>, or if you want a two-sided test you can change it to <p style="background-color:#F5F5F5;">“two.sided”</p>
+  <br><br>
+  
+  To do this in Python, we follow the same steps using the following code:
+  <br><br>
+
+  <img src="pythoncode1.png" alt="python code snippet for creating a contingency table with specified values and running Fisher's Exact Test" width="750">
+  <br><br>
+
+  This gives us the following results:
+  <br><br>
+
+  <img src="pythonoutput1.png" alt="python code snippet output showing the created contingency table" width="750">
+
+  <h2>How should the results be interpreted?</h2>
+  
+  Since the p-value is less than 0.05 we can say that this is a statistically significant result. We would conclude that there is evidence of a relationship between exclusion and victimisation.
+
+  How is the result calculated? Show me with an example.
+  
+  First, we need to calculate how many ways the table could be configured with a sample of 8 where the row totals are both 4 and the column totals are both 4. 
+  <br><br>
+
+  <img src="ct2.png" alt="contingency table showing only marginal totals" width="750">
+
+  There are 5 possible values for the top-left cell - the number of people who had no exclusions AND not been victimised. The number could be 0, 1, 2, 3 or 4. It can’t be more than 4 because the row total is 4. 
+  <br><br>
+  
+  If this cell contains 0, then the top-right cell (no exclusion AND victimised) must contain 4, because the ‘No exclusion’ row total is 4. 
+  <br><br>
+
+  <img src="ct3.png" alt="contingency table showing only marginal totals and cell values in top row" width="750">
+  <br><br>
+
+  The bottom-left cell must be 4 because the ‘Not victimised’ column total is 4, and the bottom-right cell must be 0 because the Exclusion row total is 4, and the Victimised column total must be 4.
+  <br><br>
+
+  <img src="ct4.png" alt="contingency table showing all values" width="750">
+  <br><br>
+
+  If we repeated this process for all the possible remaining values for the first cell (1,2,3,4) it would give us the following 4 tables:
+  <br><br>
+
+  <img src="remainingcts.png" alt="remaining contingency tables" width="750">
+  <br><br>
+
+  It’s not necessary to create all possible configurations of the table but now you can see that we have 5 possible ways that the contingency table could be configured when the row totals and column totals (sometimes called the marginal totals) are fixed (always the same).
+  <br><br>
+
+  Next, for the configuration of the contingency table that we see in our data, we need to calculate the probability of that table. If the probability is low enough then we can conclude that there is evidence that there is a relationship between exclusion and victimisation. 
+  <br><br>
+  
+  To calculate the probability, we first need to create a new contingency table where each value is the <b>factorial</b> of the original contingency table values. 
+  <br><br>
+  
+  The <b>factorial</b> of a number is the number multiplied by all the whole numbers between the number and 1. For example: 
+  <br><br>
+
+  <ul>
+    <li>4 factorial (or you could say “the factorial of 4”) is 4 * 3 * 2 * 1 = 24. </li>
+    <li>3 factorial is 3 * 2 * 1 = 6. </li>
+    <li>2 factorial is 2 * 1 = 2. </li>
+    <li>1 factorial is 1. </li>
+    <li>0 factorial is also 1. </li>
+  </ul>
+  
+  Factorial is written as an exclamation mark like this:
+  <br><br>
+  
+  4!
+  <br><br>
+  
+  …read as “four factorial” or “the factorial of four”.
+  <br><br>
+  
+  For the configuration of the table that matches our dataset:
+  <br><br>
+
+  <img src="ct1.png" alt="a two by two contingency table" width="750" height="475">
+  <br><br>
+
+  The rest of this tutorial is coming soon...
+
+</body>
+</html>
