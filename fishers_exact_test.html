@@ -218,24 +218,25 @@ In our example, where we have a sample of 4, we would expect to see:
 In <b>R</b>:
 <br><br>
 
-[SCREENSHOT HERE]
+<img src="rcode3.png" alt="chisq.test(ct)$expected" width="750">
 <br><br>
 
 This gives us the following results:
 <br><br>
 
-[SCREENSHOT HERE]
+<img src="routput3.png" alt="r output showing a 2 by 2 contingency table containing 2 in each cell" width="750">
 <br><br>
 
 In <b>Python</b>:
+<br><br>
 
-[SCREENSHOT HERE]
+<img src="pythoncode3.png" alt="from scipy.stats.contingency import expected_freq ct=[[4,0],[0,4]] expected_freq(ct)" width="750">
 <br><br>
 
 This gives us the following results:
 <br><br>
 
-[SCREENSHOT HERE]
+<img src="pythonoutput3.png" alt="python output showing a 2 by 2 matrix containing 2 in each cell" width="750">
 <br><br>
 
 To calculate them manually:
@@ -247,7 +248,7 @@ For each cell, multiply the row total with the column total and then divide by t
 In our example:
 <br><br>
 
-[SCREENSHOT HERE]
+<img src="ct6.png" alt="a two by two contingency table with each internal cell containing the calculation (4*4)/8=2" width="750">
 <br><br>
 
 <h2>Why is it called Fisher's Exact Test?</h2>
@@ -261,6 +262,7 @@ In our example:
 <h2>Tell me a fun fact about Fisher’s Exact test</h2>
 
 The test was reportedly invented in response to a lady (Muriel Bristol) who said she could tell whether a cup of tea was made by pouring the milk first or the tea first. Ronald Fisher described this experiment in a chapter called “The Principles of Experimentation, Illustrated by a Psycho-Physical Experiment” in his book called “The Design of Experiments”, published in 1960. The experiment used a sample of 8 cups of tea. Four cups were made by pouring the milk first, and four were made by pouring the tea first. The cups of tea were given to the lady at random, for her to taste each cup and give her prediction of how the tea was made.
-
+<br><br>
+  
 </body>
 </html>
