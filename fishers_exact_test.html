@@ -58,9 +58,8 @@
 
   …which shows that a greater percentage of people with an exclusion are victimised than people with no exclusions (in fact, all of the people with an exclusion have been victimised but none of the people without an exclusion have been victimised), but I know that it’s possible that this could just be specific to this particular sample and really there is no relationship. 
   <br><br>
-  
-  I’d like to run a statistical test to find out the probability that this particular configuration of the contingency table (or a more extreme configuration) could occur if there is no relationship. If that probability is extremely low – below 0.05 (5%) - then I will have some confidence that there really is a relationship between exclusion and victimisation (rather than the difference in proportions being only relevant to this particular sample). 
-  
+
+  I’d like to run a statistical test to estimate the probability of obtaining this or a more extreme configuration of the contingency table, assuming there is no relationship (i.e., under the null hypothesis). If that probability (the p-value) is very low (e.g., below 0.05), then I will have some evidence to suggest that there may be a relationship between exclusion and victimisation, rather than the observed difference being due to random variation in this sample.
   <h2>How can this be done in R or Python?</h2>
   
   To do this in R, we first need a contingency table. Let’s re-create our data in a contingency table called ‘ct’:
